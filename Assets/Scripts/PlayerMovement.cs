@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,22 +25,40 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _canMove = true;
 
+
+    public float ForceAmount = 1f;
+    public float RayLength = .1f;
+    private RaycastHit2D _raycastHitRight;
+    private RaycastHit2D _raycastHitLeft;
+
+    public LayerMask WallMask;
+    private bool _isBouncing = false;
+
+    public TextMeshProUGUI HpText;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
+
+    private void Update()
+    {
+        HpText.text = "HP: " + _playerHP;
+    }
     private void FixedUpdate()
     {
         MovePlayer();
-
+        Bounce();
+        FlipPlayer();
     }
 
     // Move player in the horizontal axis
     private void MovePlayer()
     {
-        if( _canMove)
+        if( _canMove )
         {
-            _rb.velocity = new Vector2(_playerMoveInput.x * _playerSpeed, _rb.velocity.y);
+            if(!_isBouncing)
+                _rb.velocity = new Vector2(_playerMoveInput.x * _playerSpeed, _rb.velocity.y);
         }
         else
         {
@@ -65,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (context.canceled)
             {
-                Debug.Log("Duration = " + (Time.time - _clickTime));
+                //Debug.Log("Duration = " + (Time.time - _clickTime));
                 _duration = Time.time - _clickTime;
                 if(_duration < .5)
                 {
@@ -114,6 +134,67 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, .2f, GroundLayerMask);
+        return Physics2D.OverlapCircle(GroundCheck.position, 0.05f, GroundLayerMask);
+    }
+
+    // Bounce off walls
+    private void Bounce()
+    {
+        _raycastHitRight = Physics2D.Raycast(transform.position, transform.right, RayLength, WallMask);
+        _raycastHitLeft = Physics2D.Raycast(transform.position, -transform.right, RayLength, WallMask);
+
+        if(!IsGrounded())
+        {
+            if(_rb.velocity.y > 0)
+            {
+                if (_raycastHitRight)
+                {
+                    Debug.Log("Right Wall Bounce");
+
+                    _rb.AddForce((new Vector2(-1, 0) + new Vector2(0, 1)) * ForceAmount);
+                    _isBouncing = true;
+                }
+
+                if (_raycastHitLeft)
+                {
+                    Debug.Log("Left Wall Bounce");
+                    _rb.AddForce((new Vector2(1, 0) + new Vector2(0, 1)) * ForceAmount);
+                    _isBouncing = true;
+                }
+            }
+        }
+        else
+        {
+            _isBouncing = false;
+        }
+    }
+
+    // flip the player based on the direction he want to move in
+    private void FlipPlayer()
+    {
+        Vector2 localScale = transform.localScale;
+
+        if (_playerMoveInput.x > 0)
+        {
+            localScale = new Vector2(Mathf.Abs(localScale.x), localScale.y);
+        }
+        else if (_playerMoveInput.x < 0)
+        {
+            localScale = new Vector2(-Mathf.Abs(localScale.x), localScale.y);
+        }
+
+        transform.localScale = localScale;
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + RayLength, transform.position.y));
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - RayLength, transform.position.y));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x , transform.position.y - 0.05f));
+
     }
 }
