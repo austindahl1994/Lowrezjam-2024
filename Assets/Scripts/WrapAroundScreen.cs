@@ -14,7 +14,7 @@ public class WrapAroundScreen : MonoBehaviour
     {
         //Get the screen position of object in pixel
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        Debug.Log(screenPos);
+        //Debug.Log(screenPos);
         //Get the right side of the screen in world unit
         float rightSideOfScreenInWorld = Camera.main.ScreenToWorldPoint(new Vector2(2874f, Screen.height)).x;
         float leftSideOfScreenInWorld = Camera.main.ScreenToWorldPoint(new Vector2(764f, 0f)).x;

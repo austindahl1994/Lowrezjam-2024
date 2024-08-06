@@ -7,51 +7,59 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Transform GroundCheck;
-    public LayerMask GroundLayerMask;
+    #region Variables
+    [Header("Player Movement")]
 
     [SerializeField]
     private float _playerSpeed;
-
-    private float _clickTime, _duration;
     [SerializeField]
     private float _jumpForce;
-
-    [SerializeField]
-    private int _playerHP = 100;
-
-
+    private float _clickTime, _duration;
     private Vector2 _playerMoveInput;
     private Rigidbody2D _rb;
     private bool _canMove = true;
 
 
-    public float ForceAmount = 1f;
-    public float RayLength = .1f;
+    [Header("Ground Check")]
+    [SerializeField]
+    private Transform _groundCheck;
+    [SerializeField]
+    private LayerMask _groundLayerMask;
+    [SerializeField]
+    private float _groundCheckRay = .01f;
+
+    [Header("Wall Bounce")]
+    [SerializeField]
+    private float _forceAmount = 1f;
+    [SerializeField]
+    private float _rayLength = .1f;
+    [SerializeField]
+    private LayerMask _wallMask;
+
     private RaycastHit2D _raycastHitRight;
     private RaycastHit2D _raycastHitLeft;
-
-    public LayerMask WallMask;
     private bool _isBouncing = false;
 
-    public TextMeshProUGUI HpText;
+    private PlayerHP _playerHp;
+    #endregion
 
+    #region Unity Func
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerHp = GetComponent<PlayerHP>();
     }
 
-    private void Update()
-    {
-        HpText.text = "HP: " + _playerHP;
-    }
+
     private void FixedUpdate()
     {
         MovePlayer();
         Bounce();
         FlipPlayer();
     }
+    #endregion
 
+    # region Built up Methods
     // Move player in the horizontal axis
     private void MovePlayer()
     {
@@ -99,49 +107,23 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb.velocity = new Vector2(0f, _jumpForce * 2f);
                 }
-                DecreasePlayerHP(_duration);
+                _playerHp.DecreasePlayerHP(_duration);
                 _canMove = true;
             }
         }
 
     }
 
-    // Decrease player HP based on the jump button hold duration
-    private void DecreasePlayerHP(float holdDuration)
-    {
-
-        if ( holdDuration < .5)
-        {
-            _playerHP -= 5;
-
-        }
-        else if (holdDuration < 1f && holdDuration > .5)
-        {
-            _playerHP -= 10;
-
-        }
-        else if(holdDuration < 1.5f)
-        {
-            _playerHP -= 20;
-
-        }
-        else
-        {
-            _playerHP -= 30;
-
-        }
-    }
-
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.05f, GroundLayerMask);
+        return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRay, _groundLayerMask);
     }
 
     // Bounce off walls
     private void Bounce()
     {
-        _raycastHitRight = Physics2D.Raycast(transform.position, transform.right, RayLength, WallMask);
-        _raycastHitLeft = Physics2D.Raycast(transform.position, -transform.right, RayLength, WallMask);
+        _raycastHitRight = Physics2D.Raycast(transform.position, transform.right, _rayLength, _wallMask);
+        _raycastHitLeft = Physics2D.Raycast(transform.position, -transform.right, _rayLength, _wallMask);
 
         if(!IsGrounded())
         {
@@ -149,16 +131,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (_raycastHitRight)
                 {
-                    Debug.Log("Right Wall Bounce");
+                   //Debug.Log("Right Wall Bounce");
 
-                    _rb.AddForce((new Vector2(-1, 0) + new Vector2(0, 1)) * ForceAmount);
+                    _rb.AddForce((new Vector2(-1, 0) + new Vector2(0, 1)) * _forceAmount);
                     _isBouncing = true;
                 }
 
                 if (_raycastHitLeft)
                 {
-                    Debug.Log("Left Wall Bounce");
-                    _rb.AddForce((new Vector2(1, 0) + new Vector2(0, 1)) * ForceAmount);
+                    //Debug.Log("Left Wall Bounce");
+                    _rb.AddForce((new Vector2(1, 0) + new Vector2(0, 1)) * _forceAmount);
                     _isBouncing = true;
                 }
             }
@@ -190,11 +172,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + RayLength, transform.position.y));
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + _rayLength, transform.position.y));
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - RayLength, transform.position.y));
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - _rayLength, transform.position.y));
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x , transform.position.y - 0.05f));
+        Gizmos.DrawLine(_groundCheck.position, new Vector2(_groundCheck.position.x , _groundCheck.position.y - _groundCheckRay));
 
     }
+    #endregion
 }
