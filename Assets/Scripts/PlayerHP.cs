@@ -18,7 +18,7 @@ public class PlayerHP : MonoBehaviour
     // Decrease player HP based on the jump button hold duration
     public void DecreasePlayerHP(float holdDuration)
     {
-
+        /*
         if (holdDuration < .5)
         {
             _healthPoints -= 5;
@@ -38,7 +38,8 @@ public class PlayerHP : MonoBehaviour
         {
             _healthPoints -= 30;
 
-        }
+        }*/
+        _healthPoints -= holdDuration;
     }
 
     public void IncreasePlayerHP(int amount)
