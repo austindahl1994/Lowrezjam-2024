@@ -1624,7 +1624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHp: {fileID: 375648827}
   _healingAmount: 1
-  _timeBetweelHeal: 1
+  _timeBetweelHeal: 0.3
   _player: {fileID: 375648821}
   _checkDistance: 0.14
 --- !u!212 &851653735
