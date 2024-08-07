@@ -12,23 +12,18 @@ public class WrapAroundScreen : MonoBehaviour
 
     void Update()
     {
-        //Get the screen position of object in pixel
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        //Debug.Log(screenPos);
-        //Get the right side of the screen in world unit
-        float rightSideOfScreenInWorld = Camera.main.ScreenToWorldPoint(new Vector2(2874f, Screen.height)).x;
-        float leftSideOfScreenInWorld = Camera.main.ScreenToWorldPoint(new Vector2(764f, 0f)).x;
+        Vector3 cameraPos = Camera.main.transform.position;
 
-        //if Player moving through left side of the screen
-        if(screenPos.x <= 764f && _rb.velocity.x < 0)
+        float rightBound = 3.63f;
+        float leftBound = -3.63f;
+
+        if (transform.position.x >= rightBound && _rb.velocity.x > 0)
         {
-            transform.position = new Vector2(rightSideOfScreenInWorld, transform.position.y);
+            transform.position = new Vector2(leftBound, transform.position.y);
         }
-
-        //if Player moving through right side of the screen
-        else if (screenPos.x >= 3060f && _rb.velocity.x > 0)
+        else if (transform.position.x <= leftBound && _rb.velocity.x < 0)
         {
-            transform.position = new Vector2(leftSideOfScreenInWorld, transform.position.y);
+            transform.position = new Vector2(rightBound, transform.position.y);
         }
     }
 }
