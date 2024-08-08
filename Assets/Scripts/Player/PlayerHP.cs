@@ -9,6 +9,7 @@ public class PlayerHP : MonoBehaviour
     public TextMeshProUGUI HpText;
     private Player player;
     private Movement move;
+    public bool PlayerIsDead = false;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class PlayerHP : MonoBehaviour
             _healthPoints = 0;
             player.SetState(3);
             move.canMove = false;
+            PlayerIsDead = true;
         }
         else {
             _healthPoints -= holdDuration;
