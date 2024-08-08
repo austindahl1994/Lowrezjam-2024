@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f2550fd8e8e2da46a969b5e90bf30ec
+guid: 4cfabe17bf1e1af418e84c26f22865d7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,169 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c11960ed83fb75748ac879b3c0b87fa6
-      internalID: 1543778800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23b335b72224af2418e42c322cf6d2ec
-      internalID: -2092720585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_2
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 16
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1c783e590b29bc43b8235f167b94cd9
-      internalID: -195870565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_3
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 16
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0b0ebf3dc1d9ed48a1458e001c7837d
-      internalID: 1062355740
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_4
+      name: mimic-platform-sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: baca510b990debc448d05f282be25171
-      internalID: -62021440
+      spriteID: d1cc9598d9a466b47b920b4ac64391ca
+      internalID: -2116117333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_5
+      name: mimic-platform-sheet_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eff529a7a790aa149ae8a97f49247505
-      internalID: -1197832811
+      spriteID: b60b791af3846c942adf13fcdf1a3b62
+      internalID: 2035432055
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_6
+      name: mimic-platform-sheet_2
       rect:
         serializedVersion: 2
-        x: 30
+        x: 48
         y: 0
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94083d461eaee324997a88412b16c249
-      internalID: -264932981
+      spriteID: 1e2f23a155526b34e8f650cd3158c633
+      internalID: -698843187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_7
+      name: mimic-platform-sheet_3
       rect:
         serializedVersion: 2
-        x: 43
+        x: 72
         y: 0
-        width: 7
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d677c812500e5624499ec05636e52d46
-      internalID: 1020780811
+      spriteID: ec77272819453834d9f4b44d81754ee8
+      internalID: 1068769142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimic-platform-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fcdc93816e88234185b2d79c85af554
+      internalID: -689134979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimic-platform-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 2
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38b0ce8e5aa623743b412af9e72acee0
+      internalID: -1848235285
       vertices: []
       indices: 
       edges: []
@@ -288,14 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_0: 1543778800
-      Player_1: -2092720585
-      Player_2: -195870565
-      Player_3: 1062355740
-      Player_4: -62021440
-      Player_5: -1197832811
-      Player_6: -264932981
-      Player_7: 1020780811
+      mimic-platform-sheet_0: -2116117333
+      mimic-platform-sheet_1: 2035432055
+      mimic-platform-sheet_2: -698843187
+      mimic-platform-sheet_3: 1068769142
+      mimic-platform-sheet_4: -689134979
+      mimic-platform-sheet_5: -1848235285
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

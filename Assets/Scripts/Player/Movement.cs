@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     public float jumpForce = 10;
     private PlayerHP _playerHp;
     private PlayerParticles _particles;
+    private Player player;
     public Transform groundCheck;
     public LayerMask groundLayer;
 
@@ -13,15 +14,22 @@ public class Movement : MonoBehaviour
 
     private bool facingRight = true;
     private bool isGrounded;
+    public bool canMove;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         _playerHp = GetComponent<PlayerHP>();
         _particles = GetComponent<PlayerParticles>();
+        player = GetComponent<Player>();
+        canMove = true;
     }
 
     private void Update()
     {
+        if (!canMove) {
+            player.SetState(3);
+            return;
+        }
         Move();
         Jump();
     }
@@ -35,7 +43,18 @@ public class Movement : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-
+        if (rb.velocity.x == 0 && isGrounded)
+        {
+            player.SetState(0);
+        }
+        else if (Mathf.Abs(rb.velocity.x) >= 0 && isGrounded)
+        {
+            player.SetState(1);
+        }
+        else {
+            player.SetState(2);
+        }
+        //Debug.Log(rb.velocity.x);
         float clampedX = Mathf.Clamp(rb.position.x, -3.64f, 3.64f);
 
         rb.position = new Vector2(clampedX, transform.position.y);
@@ -58,6 +77,7 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             _playerHp.DecreasePlayerHP(5);
             _particles.Spurt(direction);
+            player.SetState(2);
         }
     }
 
