@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
 
     private bool facingRight = true;
-    private bool isGrounded;
+    public bool isGrounded;
     public bool canMove;
     private void Start()
     {
