@@ -9,6 +9,7 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private float _healthPoints = 100;
     public TextMeshProUGUI HpText;
+    internal bool PlayerIsDead = false;
 
     private void Update()
     {
@@ -40,6 +41,7 @@ public class PlayerHP : MonoBehaviour
 
         }*/
         _healthPoints -= holdDuration;
+        CheckHealth();
     }
 
     public void IncreasePlayerHP(int amount)
@@ -50,6 +52,13 @@ public class PlayerHP : MonoBehaviour
         }
         
     }
-    
+
+    private void CheckHealth()
+    {
+        if(_healthPoints <= 0)
+        {
+            PlayerIsDead = true;
+        }
+    }
 
 }
