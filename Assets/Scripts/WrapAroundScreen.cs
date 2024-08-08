@@ -35,9 +35,6 @@ public class WrapAroundScreen : MonoBehaviour
     }
 
     private bool CheckForTerrain() {
-        /*float xCheck = transform.position.x < 0 ? 3.5f : -3.5f;
-        Collider2D collider = Physics2D.OverlapPoint(new Vector2(xCheck,  transform.position.y), layerMask);
-        return collider != null;*/
         Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y));
         return tilemap.GetTile(cellPosition) == null;
     }
