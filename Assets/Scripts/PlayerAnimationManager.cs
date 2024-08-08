@@ -27,7 +27,7 @@ public class PlayerAnimationManager : MonoBehaviour
         }
         else
         {
-            if (_movement.IsGrounded)
+            if (_movement.isGrounded)
             {
 
                 if (moveInput == 0)
