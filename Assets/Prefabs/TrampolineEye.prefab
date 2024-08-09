@@ -101,7 +101,8 @@ MonoBehaviour:
   - {fileID: 1338055877, guid: f3df7698141ef2a4cb6abe0965bc926f, type: 3}
   - {fileID: 977042234, guid: f3df7698141ef2a4cb6abe0965bc926f, type: 3}
   - {fileID: -629794137, guid: f3df7698141ef2a4cb6abe0965bc926f, type: 3}
-  bounceSound: {fileID: 0}
+  bounceSound: {fileID: 8300000, guid: adebffc408c68054b8a3b467702e005e, type: 3}
+  bounceEffect: {fileID: 11400000, guid: 2b7ef8e94883e144e9a32f06ee292d6a, type: 2}
   trampolineAnimator: {fileID: 2560787352743444964}
 --- !u!1 &932407296276454156
 GameObject:

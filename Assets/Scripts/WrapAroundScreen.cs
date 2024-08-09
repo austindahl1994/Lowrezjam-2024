@@ -21,13 +21,13 @@ public class WrapAroundScreen : MonoBehaviour
 
         if (transform.position.x >= rightBound && _rb.velocity.x > 0)
         {
-            if (CheckForTerrain()) {
+            if (CheckForTerrain() && CheckForObject()) {
                 transform.position = new Vector2(leftBound, transform.position.y);
             }
         }
         else if (transform.position.x <= leftBound && _rb.velocity.x < 0)
         {
-            if (CheckForTerrain())
+            if (CheckForTerrain() && CheckForObject())
             {
                 transform.position = new Vector2(rightBound, transform.position.y);
             }
@@ -37,5 +37,19 @@ public class WrapAroundScreen : MonoBehaviour
     private bool CheckForTerrain() {
         Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y));
         return tilemap.GetTile(cellPosition) == null;
+    }
+
+    //check for monsters added to dictionary for their positions/widths
+    private bool CheckForObject() {
+        return true; 
+    }
+
+    //check to see if player is inside terrain
+    private void CheckInTerrain(Vector2 currentPos) {
+        
+    }
+    //If inside terrain or monster, can go down, if not able to (at bottom of map), then go next highest up
+    private void ClosestTerrainExit(Vector2 currentPos) {
+        
     }
 }

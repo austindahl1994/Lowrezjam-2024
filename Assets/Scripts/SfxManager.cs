@@ -39,26 +39,39 @@ public class SfxManager : MonoBehaviour
     }
 
     // return the length of a player sfx clip
-    public float PlayerSfxClipLength(string SfxName)
+    public float PlayerSfxClipLength(string sfxName)
     {
-        return FindSfx(_playerSfx, SfxName).Clip.length;
+        SoundSO sound = FindSfx(_playerSfx, sfxName);
+
+        if (sound != null && sound.Clips.Count > 0)
+        {
+            return sound.Clips[0].length;
+        }
+
+        Debug.LogWarning("No clips found for " + sfxName);
+        return 0f;
     }
+
 
     // Play a specific Sfx by giving it's name and the list it belong to
     private void PlaySfx(string audioName, SoundSO[] sfxList)
     {
-        // Find the sfx clip in the givin list with the provided name
-        SoundSO audioClip = FindSfx(sfxList, audioName);
-        // Create an audio source in the scene with the clip that we found
-        AudioSource audioSource = Instantiate(_audioSource, transform.position, Quaternion.identity);
-        // We assign the clip and it's volume to the audio source
-        audioSource.clip = audioClip.Clip;
-        audioSource.volume = audioClip.Volume;
-        // we play the clip
-        audioSource.Play();
-        // we destroy the audio source when the clip end playing
-        Destroy(audioSource.gameObject, audioSource.clip.length);
+        SoundSO sound = FindSfx(sfxList, audioName);
+
+        if (sound != null && sound.Clips.Count > 0)
+        {
+            AudioClip selectedClip = sound.Clips[UnityEngine.Random.Range(0, sound.Clips.Count)];
+            AudioSource audioSource = Instantiate(_audioSource, transform.position, Quaternion.identity);
+            audioSource.clip = selectedClip;
+            audioSource.volume = sound.Volume;
+            audioSource.spatialBlend = 0f;
+
+            audioSource.Play();
+
+            Destroy(audioSource.gameObject, selectedClip.length);
+        }
     }
+
 
     #endregion
 
