@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         normalPlayer = gameObject.transform.GetChild(0);
-        explodingPlayer = gameObject.transform.GetChild(1);
+        explodingPlayer = gameObject.transform.GetChild(1).GetChild(0);
     }
 
     public void FunKill() {
