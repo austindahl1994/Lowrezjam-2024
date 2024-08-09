@@ -17,12 +17,12 @@ public class CameraController : MonoBehaviour
 
     public void ChangeTarget(int value)
     {
-        target = value switch
-        {
-            1 => PlayerHead,
-            2 => PlayerBody,
-            _ => Player
-        };
+            target = value switch
+            {
+                1 => PlayerHead,
+                2 => PlayerBody,
+                _ => Player
+            };
     }
 
     void Update()
