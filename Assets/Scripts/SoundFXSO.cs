@@ -6,8 +6,8 @@ public class SoundSO : ScriptableObject
 {
     public string AudioName;
     public List<AudioClip> Clips;
-    [Range(0f, 1f)]
-    public float Volume;
+    [Range(0, 10)]
+    public int Volume;
 
     public void PlayAudio()
     {

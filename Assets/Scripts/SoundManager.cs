@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class SfxManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     #region Variables
 
-    public static SfxManager Instance;
+    public static SoundManager Instance;
 
     [Header("Player Sfx List")]
     [SerializeField]
@@ -85,6 +85,17 @@ public class SfxManager : MonoBehaviour
             time = Time.time;
         }
     }
+
+    public void ChangeSoundVolum()
+    {
+        Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
+
+        foreach (var sound in _playerSfx)
+        {
+            sound.Volume = (int)UIManager.Instance.SoundSlider.value;
+        }
+    }
+
     #endregion
 
     #endregion
