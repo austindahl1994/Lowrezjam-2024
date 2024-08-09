@@ -15,22 +15,36 @@ public class Movement : MonoBehaviour
     public bool canMove;
     public bool canDoubleJump;
     public int jumpCount;
-    public bool isBouncing;
+    public bool isBouncing = false;
+
+    [Header("Wall Bounce")]
+    [SerializeField]
+    private float forceAmount = 1f;
+    [SerializeField]
+    private float rayLength = .1f;
+    [SerializeField]
+    private LayerMask wallMask;
+    [SerializeField]
+    private float rayOffSet;
+    private RaycastHit2D raycastHitRight;
+    private RaycastHit2D raycastHitLeft;
+    private Vector2 rayOrigin;
+    internal bool StoredValue;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         canMove = true;
-        isBouncing = false;
     }
 
     private void Update()
     {
-        if (!canMove) {
+        if (!canMove || PlayerManager.Instance.PlayerDead) {
             return;
         }
         Move();
         Jump();
+        Bounce();
     }
 
     private void FixedUpdate()
@@ -40,34 +54,34 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
+        float moveInput = Input.GetAxis("Horizontal");
         if (!isBouncing) {
-            float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        }
 
-            if (rb.velocity.x == 0 && isGrounded)
-            {
-                playerState.SetState(0);
-            }
-            else if (Mathf.Abs(rb.velocity.x) >= 0 && isGrounded)
-            {
-                playerState.SetState(1);
-            }
-            else
-            {
-                playerState.SetState(2);
-            }
-            //Debug.Log(rb.velocity.x);
-            float clampedX = Mathf.Clamp(rb.position.x, -3.64f, 3.64f);
+        if (rb.velocity.x == 0 && isGrounded)
+        {
+            playerState.SetState(0);
+        }
+        else if (Mathf.Abs(rb.velocity.x) >= 0 && isGrounded)
+        {
+            playerState.SetState(1);
+        }
+        else
+        {
+            playerState.SetState(2);
+        }
+        //Debug.Log(rb.velocity.x);
+        float clampedX = Mathf.Clamp(rb.position.x, -3.64f, 3.64f);
 
-            rb.position = new Vector2(clampedX, transform.position.y);
-            if (moveInput > 0 && !facingRight)
-            {
-                Flip();
-            }
-            else if (moveInput < 0 && facingRight)
-            {
-                Flip();
-            }
+        rb.position = new Vector2(clampedX, transform.position.y);
+        if (moveInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (moveInput < 0 && facingRight)
+        {
+            Flip();
         }
     }
 
@@ -107,5 +121,49 @@ public class Movement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    // Bounce off walls
+    private void Bounce()
+    {
+        rayOrigin = new Vector2(transform.position.x, transform.position.y + rayOffSet);
+        raycastHitRight = Physics2D.Raycast(transform.position, transform.right, rayLength, wallMask);
+        raycastHitLeft = Physics2D.Raycast(transform.position, -transform.right, rayLength, wallMask);
+
+        if (!isGrounded)
+        {
+            if (rb.velocity.y > 0)
+            {
+                if (raycastHitRight)
+                {
+                    //Debug.Log("Right Wall Bounce");
+
+                    rb.AddForce((new Vector2(-1, 0) + new Vector2(0, 1)) * forceAmount);
+                    isBouncing = true;
+                }
+
+                if (raycastHitLeft)
+                {
+                    // Debug.Log("Left Wall Bounce");
+                    rb.AddForce((new Vector2(1, 0) + new Vector2(0, 1)) * forceAmount);
+                    isBouncing = true;
+                }
+            }
+        }
+        else
+        {
+            isBouncing = false;
+        }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        rayOrigin = new Vector2(transform.position.x, transform.position.y + rayOffSet);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(rayOrigin, new Vector2(rayOrigin.x + rayLength, rayOrigin.y));
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(rayOrigin, new Vector2(rayOrigin.x - rayLength, rayOrigin.y));
+
     }
 }
