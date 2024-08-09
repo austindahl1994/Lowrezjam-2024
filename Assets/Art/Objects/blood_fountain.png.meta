@@ -116,9 +116,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 20
-        height: 23
+        height: 19
       alignment: 9
-      pivot: {x: 0.5, y: 0.5217391}
+      pivot: {x: 0.3, y: 0.21052632}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -137,9 +137,9 @@ TextureImporter:
         x: 32
         y: 0
         width: 20
-        height: 23
+        height: 19
       alignment: 9
-      pivot: {x: 0.5, y: 0.5217391}
+      pivot: {x: 0.3, y: 0.21052632}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,9 +158,9 @@ TextureImporter:
         x: 64
         y: 0
         width: 20
-        height: 23
+        height: 19
       alignment: 9
-      pivot: {x: 0.5, y: 0.5217391}
+      pivot: {x: 0.3, y: 0.21052632}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,27 +168,6 @@ TextureImporter:
       bones: []
       spriteID: d924b5439e800ec4bae802fcb1f91e1b
       internalID: -965704668
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blood_fountain_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 20
-        height: 23
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5217391}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01d4d66ed6fe52b4893a337c1f65e878
-      internalID: -791193860
       vertices: []
       indices: 
       edges: []
@@ -207,7 +186,6 @@ TextureImporter:
       blood_fountain_0: 144263398
       blood_fountain_1: 1817198739
       blood_fountain_2: -965704668
-      blood_fountain_3: -791193860
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

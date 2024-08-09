@@ -40,14 +40,13 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit2D _raycastHitLeft;
     private bool _isBouncing = false;
 
-    private PlayerHP _playerHp;
     #endregion
 
     #region Unity Func
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerHp = GetComponent<PlayerHP>();
+        //_playerHp = GetComponent<PlayerHP>();
     }
 
 
@@ -107,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb.velocity = new Vector2(0f, _jumpForce * 2f);
                 }
-                _playerHp.DecreasePlayerHP(_duration);
+                PlayerManager.Instance.ChangeHp(1);
                 _canMove = true;
             }
         }
