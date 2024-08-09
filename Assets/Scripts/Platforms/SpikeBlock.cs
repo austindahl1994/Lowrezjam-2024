@@ -21,13 +21,13 @@ public class SpikeBlock : MonoBehaviour
         {
             PlayerManager.Instance.ChangeHp(1, false, false, 0, (rotateValue * 90) % 360);
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            collision.gameObject.GetComponent<Movement>().isBouncing = true;
             StartCoroutine(HandleBounce(rb, collision));
         }
     }
 
     private IEnumerator HandleBounce(Rigidbody2D rb, Collider2D collision)
     {
+        collision.gameObject.GetComponent<Movement>().gettingHit = true;
         if (rotateValue == 3 || rotateValue == 1)
         {
             rb.velocity = new Vector2(rb.velocity.x, rotateValue == 3 ? bounceForce : -bounceForce);
@@ -39,7 +39,7 @@ public class SpikeBlock : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        collision.gameObject.GetComponent<Movement>().isBouncing = false;
+        collision.gameObject.GetComponent<Movement>().gettingHit = false;
     }
 
 }

@@ -15,7 +15,8 @@ public class Movement : MonoBehaviour
     public bool canMove;
     public bool canDoubleJump;
     public int jumpCount;
-    public bool isBouncing = false;
+    public bool gettingHit;
+    public bool isBouncing;
 
     [Header("Wall Bounce")]
     [SerializeField]
@@ -35,6 +36,8 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         canMove = true;
+        isBouncing = false;
+        gettingHit = false;
     }
 
     private void Update()
@@ -55,7 +58,8 @@ public class Movement : MonoBehaviour
     private void Move()
     {
         float moveInput = Input.GetAxis("Horizontal");
-        if (!isBouncing) {
+
+        if (!isBouncing && !gettingHit) {
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         }
 
