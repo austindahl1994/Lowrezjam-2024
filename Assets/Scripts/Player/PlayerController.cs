@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private Transform normalPlayer;
     private Transform explodingPlayer;
-    private PlayerHP playerHP;
 
     [SerializeField]
     private CameraController cameraController;
@@ -14,15 +13,13 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         normalPlayer = gameObject.transform.GetChild(0);
-        explodingPlayer = gameObject.transform.GetChild(1);
-        playerHP = gameObject.transform.GetChild(1).GetComponent<PlayerHP>();
+        explodingPlayer = gameObject.transform.GetChild(1).GetChild(0);
     }
 
     public void FunKill() {
         explodingPlayer.position = normalPlayer.position;
         normalPlayer.gameObject.SetActive(false);
         explodingPlayer.gameObject.SetActive(true);
-        playerHP.KillPlayer();
-        cameraController.ChangeTarget();
+        cameraController.ChangeTarget(1);
     }
 }

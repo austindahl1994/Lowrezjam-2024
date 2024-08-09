@@ -7,20 +7,18 @@ public class PlayerAnimationManager : MonoBehaviour
     private Animator _anim;
     private Rigidbody2D _rb;
     private Movement _movement;
-    private PlayerHP _playerHP;
     private void Start()
     {
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _movement = GetComponent<Movement>();
-        _playerHP = GetComponent<PlayerHP>();
     }
 
     private void Update()
     {
         float moveInput = Input.GetAxis("Horizontal");
 
-        if (_playerHP.PlayerIsDead)
+        if (PlayerManager.Instance.CurrentPlayerHp <= 0)
         {
             _anim.Play("player_dead");
 

@@ -9,7 +9,7 @@ public class Mimic : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField]
-    private Player player;
+    private GameObject player;
 
     private Transform fake;
     private Transform real;
@@ -17,15 +17,12 @@ public class Mimic : MonoBehaviour
     public float targetAngle;
     private bool isPlayerInside = false;
 
-    private void Awake()
+    private void Start()
     {
         if (player == null)
         {
-            player = FindObjectOfType<Player>();
+            player = PlayerManager.Instance.player;
         }
-    }
-    private void Start()
-    {
         fake = gameObject.transform.GetChild(0);
         real = gameObject.transform.GetChild(1);
         eye = real.gameObject.transform.GetChild(0);
@@ -62,7 +59,7 @@ public class Mimic : MonoBehaviour
         if (isPlayerInside)
         {
             real.GetComponent<Animator>().SetTrigger("Bite");
-            playerController.FunKill();
+            PlayerManager.Instance.ChangeHp(0, true, false, 1);
         }
         else
         {
