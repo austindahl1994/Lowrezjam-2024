@@ -18,7 +18,7 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Horizontal");
 
-        if (PlayerManager.Instance.PlayerDead)
+        if (PlayerManager.Instance.CurrentPlayerHp <= 0)
         {
             _anim.Play("player_dead");
 
@@ -35,7 +35,8 @@ public class PlayerAnimationManager : MonoBehaviour
                 else
                 {
                     _anim.Play("player_walk");
-                    //SfxManager.Instance.PlayPlayerSfx("WalkSFX");
+                    SfxManager.Instance.PlayPlayerSfx("WalkSFX");
+
                 }
 
             }

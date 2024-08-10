@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WalkSFX
   m_EditorClassIdentifier: 
   AudioName: WalkSFX
-  Clips: []
-  Volume: 10
+  Clip: {fileID: 8300000, guid: 6e0f1ea27c5a08346851a2a4628533b4, type: 3}
+  Volume: 1
