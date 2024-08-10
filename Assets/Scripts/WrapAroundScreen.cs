@@ -18,6 +18,11 @@ public class WrapAroundScreen : MonoBehaviour
         //Debug.Log(oppositePosition.x);
         float rightBound = 3.62f;
         float leftBound = -3.62f;
+    {
+        //Debug.Log(transform.position.x);
+        //Debug.Log(oppositePosition.x);
+        float rightBound = 3.62f;
+        float leftBound = -3.62f;
 
             if (transform.position.x >= rightBound && _rb.velocity.x > 0)
             {
