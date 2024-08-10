@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 392da5051421bbe4f88bc7bce33b0d21, type: 3}
-  m_Name: Death
+  m_Name: EyeBounce
   m_EditorClassIdentifier: 
-  AudioName: Death Sounds
+  AudioName: Eye Bounce
   Clips:
-  - {fileID: 8300000, guid: ebcd240b8bc13844ab9b70cf1849b56a, type: 3}
-  - {fileID: 8300000, guid: 58c8b69b588ceb7439a988ad9c1df047, type: 3}
-  - {fileID: 8300000, guid: caaebcbc6a9727b43981e9281f728c3d, type: 3}
-  Volume: 4
+  - {fileID: 8300000, guid: adebffc408c68054b8a3b467702e005e, type: 3}
+  Volume: 1

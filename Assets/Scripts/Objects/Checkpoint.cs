@@ -11,7 +11,6 @@ public class Checkpoint : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         lit = false;
-        GameManager.Instance.checkpoints.Add(transform);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,9 +19,15 @@ public class Checkpoint : MonoBehaviour
             return;
         }
         if (collision.CompareTag("Player")) {
+            GameManager.Instance.checkpoints.Add(transform);
             GameManager.Instance.UpdateCheckpoint(transform.position, PlayerManager.Instance.CurrentPlayerHp);
             lit = true;
             animator.SetBool("Lit", true);
         }
+    }
+
+    public void ResetCheckpoint() {
+        lit = false;
+        animator.SetBool("Lit", false);
     }
 }
