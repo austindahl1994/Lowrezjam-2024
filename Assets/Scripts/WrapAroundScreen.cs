@@ -33,7 +33,7 @@ public class WrapAroundScreen : MonoBehaviour
                 }
             }
         }
-    }
+    
 
     //returns true if there is nothing
     private bool CheckForTerrain()
@@ -48,3 +48,4 @@ public class WrapAroundScreen : MonoBehaviour
         return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y));
     }
 }
+
