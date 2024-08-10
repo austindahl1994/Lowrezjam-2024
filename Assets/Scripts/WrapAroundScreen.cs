@@ -6,7 +6,6 @@ public class WrapAroundScreen : MonoBehaviour
     private Rigidbody2D _rb;
     public LayerMask layerMask;
     public Tilemap tilemap;
-    public bool CanWrap = true;
 
     void Start()
     {
@@ -15,12 +14,10 @@ public class WrapAroundScreen : MonoBehaviour
 
     void Update()
     {
-        if (CanWrap)
-        {
-            //Debug.Log(transform.position.x);
-            //Debug.Log(oppositePosition.x);
-            float rightBound = 3.62f;
-            float leftBound = -3.62f;
+        //Debug.Log(transform.position.x);
+        //Debug.Log(oppositePosition.x);
+        float rightBound = 3.62f;
+        float leftBound = -3.62f;
 
             if (transform.position.x >= rightBound && _rb.velocity.x > 0)
             {
@@ -36,7 +33,7 @@ public class WrapAroundScreen : MonoBehaviour
                 }
             }
         }
-    }
+    
 
     //returns true if there is nothing
     private bool CheckForTerrain()
@@ -51,3 +48,4 @@ public class WrapAroundScreen : MonoBehaviour
         return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y));
     }
 }
+

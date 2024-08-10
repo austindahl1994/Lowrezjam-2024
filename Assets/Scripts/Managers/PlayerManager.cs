@@ -16,8 +16,8 @@ public class PlayerManager : MonoBehaviour
     public int PlayerDeathCount { get; private set; }
     public Vector2 CurrentPlayerPosition { get; private set; } 
 
-/*    [SerializeField] private SoundSO damageSound;
-    [SerializeField] private SoundSO deathSound;*/
+    [SerializeField] private SoundSO damageSound;
+    [SerializeField] private SoundSO deathSound;
 
     private void Awake()
     {
@@ -91,15 +91,12 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void PlayPlayerDamageSound() {
-        //damageSound.PlayAudio();
-        SoundManager.Instance.PlayPlayerSfx("Damage Sounds");
+        damageSound.PlayAudio();
     }
 
     public void PlayPlayerDeathSound()
     {
-        //deathSound.PlayAudio();
-        SoundManager.Instance.PlayPlayerSfx("Death Sounds");
-
+        deathSound.PlayAudio();
     }
 
     private void DeathStyle(int deathType) {
@@ -110,7 +107,7 @@ public class PlayerManager : MonoBehaviour
                 break;
             default:
                 //Debug.Log("Died normally, setting state to 3");
-                //player.GetComponent<PlayerState>().SetState(3);
+                player.GetComponent<PlayerState>().SetState(3);
                 break;
         }
     }

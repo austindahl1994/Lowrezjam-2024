@@ -20,7 +20,6 @@ public class TrampolineEye : MonoBehaviour
     public Animator trampolineAnimator;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    private Movement playerMovement;
     private void Start()
     {
         if (player == null)
@@ -29,7 +28,6 @@ public class TrampolineEye : MonoBehaviour
         }
         sr = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         rb = player.GetComponent<Rigidbody2D>();
-        playerMovement = rb.GetComponent<Movement>();
         StartCoroutine(Blink());
     }
 
@@ -86,10 +84,9 @@ public class TrampolineEye : MonoBehaviour
                 player.GetComponent<Movement>().ResetDoubleJump();
             }
             rb.velocity = new Vector2(rb.velocity.x, bounceForce);
-            playerMovement.isBouncing = false;
             if (other.TryGetComponent<Animator>(out Animator animator) && !PlayerManager.Instance.PlayerDead)
             {
-                //animator.Play("Idle");
+                animator.Play("Idle");
             }
             if (trampolineAnimator != null)
             {
