@@ -83,18 +83,17 @@ public class TrampolineEye : MonoBehaviour
             if (other.CompareTag("Player")) {
                 player.GetComponent<Movement>().ResetDoubleJump();
             }
+
             rb.velocity = new Vector2(rb.velocity.x, bounceForce);
-            if (other.TryGetComponent<Animator>(out Animator animator) && !PlayerManager.Instance.PlayerDead)
-            {
-                animator.Play("Idle");
-            }
+            player.GetComponent<Movement>().isBouncing = false;
             if (trampolineAnimator != null)
             {
                 trampolineAnimator.SetTrigger("Blink");
             }
+
              if (bounceEffect != null)
             {
-                bounceEffect.PlayAudio();
+                SoundManager.Instance.PlayPlayerSfx("Eye Bounce");
             }
         }
     }
