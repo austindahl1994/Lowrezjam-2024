@@ -40,12 +40,12 @@ public class BlackoutScreen : MonoBehaviour
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;
-            color.a = Mathf.Lerp(0f, 0.5f, normalizedTime);
+            color.a = Mathf.Lerp(0f, 0.8f, normalizedTime);
             image.color = color;
             yield return null;
         }
 
-        color.a = 0.5f;
+        color.a = 0.8f;
         image.color = color;
         fading = false;
         foreach (Button btn in btns) { 
@@ -60,13 +60,13 @@ public class BlackoutScreen : MonoBehaviour
             btn.gameObject.SetActive(false);
         }
         Color color = image.color;
-        color.a = 0.5f;
+        color.a = 0.8f;
         image.color = color;
 
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;
-            color.a = Mathf.Lerp(0.5f, 0f, normalizedTime);
+            color.a = Mathf.Lerp(0.8f, 0f, normalizedTime);
             image.color = color;
             yield return null;
         }

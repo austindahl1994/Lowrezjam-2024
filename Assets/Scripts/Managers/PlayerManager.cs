@@ -36,7 +36,9 @@ public class PlayerManager : MonoBehaviour
         InitializePlayer(new Vector2(0.5f, -1.5f));
     }
 
-    public void InitializePlayer(Vector2 pos, int hp = 3, int hpPowerUpCount = 0) {
+    public void InitializePlayer(Vector2 pos, int hp = 3) {
+        UIManager.Instance.GetComponent<Timer>().StartTimer();
+        ResetMaxHp();
         if (PlayerDead) {
             player.SetActive(true);
             player.GetComponent<PlayerState>().ResetState();
@@ -46,9 +48,8 @@ public class PlayerManager : MonoBehaviour
         if (bodyParent.GetChild(0).gameObject.activeInHierarchy) {
             bodyParent.GetComponentInChildren<PartResetter>().ResetParts();
         }
-        PlayerMaxHP = hpPowerUpCount + hp;
-        CurrentPlayerHp = PlayerMaxHP;
-        ChangeUiHp(PlayerMaxHP);
+        CurrentPlayerHp = hp;
+        ChangeUiHp(CurrentPlayerHp);
         player.GetComponent<Movement>().canMove = true;
         player.transform.position = new Vector2(pos.x, pos.y + 0.1f);
         bodyParent.GetChild(0).transform.position = player.transform.position;
@@ -59,11 +60,16 @@ public class PlayerManager : MonoBehaviour
         PlayerMaxHP++;
     }
 
+    public void ResetMaxHp() {
+        PlayerMaxHP = 3;
+    }
+
     public void ChangeHp(int amount, bool killPlayer = false, bool fullHeal = false, int deathType = 0, float bloodDirection = 0) {
         if (PlayerDead) {
             return;
         }
         if (killPlayer || CurrentPlayerHp - amount <= 0) {
+            UIManager.Instance.GetComponent<Timer>().PauseTimer();
             UIManager.Instance.LowerCurtains();
             PlayerDeathCount++;
             player.GetComponent<Movement>().canMove = false;
