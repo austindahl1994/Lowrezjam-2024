@@ -22,28 +22,32 @@ public class WrapAroundScreen : MonoBehaviour
             float rightBound = 3.62f;
             float leftBound = -3.62f;
 
-        if (transform.position.x >= rightBound && _rb.velocity.x > 0)
-        {
-            if (!CheckForObject() && CheckForTerrain()) {
-                transform.position = new Vector2(leftBound, transform.position.y);
-            }
-        }
-        else if (transform.position.x <= leftBound && _rb.velocity.x < 0)
-        {
-            if (!CheckForObject() && CheckForTerrain())
+            if (transform.position.x >= rightBound && _rb.velocity.x > 0)
             {
-                transform.position = new Vector2(rightBound, transform.position.y);
+                if (!CheckForObject() && CheckForTerrain()) {
+                    transform.position = new Vector2(leftBound, transform.position.y);
+                }
+            }
+            else if (transform.position.x <= leftBound && _rb.velocity.x < 0)
+            {
+                if (!CheckForObject() && CheckForTerrain())
+                {
+                    transform.position = new Vector2(rightBound, transform.position.y);
+                }
             }
         }
     }
+
     //returns true if there is nothing
-    private bool CheckForTerrain() {
+    private bool CheckForTerrain()
+    {
         Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y));
         return tilemap.GetTile(cellPosition) == null;
     }
 
     //returns true if there is something there
-    private bool CheckForObject() {
-        return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y)); 
+    private bool CheckForObject()
+    {
+        return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y));
     }
 }
