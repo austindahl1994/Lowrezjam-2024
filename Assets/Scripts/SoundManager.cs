@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class SfxManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     #region Variables
 
-    public static SfxManager Instance;
+    public static SoundManager Instance;
 
     [Header("Player Sfx List")]
     [SerializeField]
@@ -15,7 +15,6 @@ public class SfxManager : MonoBehaviour
     [SerializeField]
     private AudioSource _audioSource;
     private float time;
-
 
     #endregion
 
@@ -60,6 +59,7 @@ public class SfxManager : MonoBehaviour
 
         if (sound != null && sound.Clips.Count > 0)
         {
+
             AudioClip selectedClip = sound.Clips[UnityEngine.Random.Range(0, sound.Clips.Count)];
             AudioSource audioSource = Instantiate(_audioSource, transform.position, Quaternion.identity);
             audioSource.clip = selectedClip;
@@ -69,6 +69,8 @@ public class SfxManager : MonoBehaviour
             audioSource.Play();
 
             Destroy(audioSource.gameObject, selectedClip.length);
+
+
         }
     }
 
@@ -79,10 +81,18 @@ public class SfxManager : MonoBehaviour
 
     public void PlayPlayerSfx(string sfxName)
     {
-        if ((Time.time - PlayerSfxClipLength(sfxName) >= time))
+        float clipLength = PlayerSfxClipLength(sfxName);
+        PlaySfx(sfxName, _playerSfx);
+        
+    }
+
+    public void ChangeSoundVolum()
+    {
+        Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
+
+        foreach (var sound in _playerSfx)
         {
-            PlaySfx(sfxName, _playerSfx);
-            time = Time.time;
+            sound.Volume = (int)UIManager.Instance.SoundSlider.value;
         }
     }
     #endregion

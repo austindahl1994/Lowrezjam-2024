@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: JumpSFX
   Clips:
   - {fileID: 8300000, guid: 7b134043bba0f31459da1409030e8231, type: 3}
-  Volume: 1
+  Volume: 10

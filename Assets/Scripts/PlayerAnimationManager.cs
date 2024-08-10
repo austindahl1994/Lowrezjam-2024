@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerAnimationManager : MonoBehaviour
 {
     private Animator _anim;
     private Rigidbody2D _rb;
     private Movement _movement;
+    private float time;
     private void Start()
     {
         _anim = GetComponent<Animator>();
@@ -18,7 +20,7 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Horizontal");
 
-        if (PlayerManager.Instance.CurrentPlayerHp <= 0)
+        if (PlayerManager.Instance.PlayerDead)
         {
             _anim.Play("player_dead");
 
@@ -35,8 +37,7 @@ public class PlayerAnimationManager : MonoBehaviour
                 else
                 {
                     _anim.Play("player_walk");
-                    SfxManager.Instance.PlayPlayerSfx("WalkSFX");
-
+                    PlaySFX("WalkSFX");
                 }
 
             }
@@ -53,6 +54,18 @@ public class PlayerAnimationManager : MonoBehaviour
             }
         }
        
+
+    }
+
+
+    private void PlaySFX(string sfxName)
+    {
+        if ((Time.time - SoundManager.Instance.PlayerSfxClipLength(sfxName) >= time))
+        {
+            SoundManager.Instance.PlayPlayerSfx(sfxName);
+            time = Time.time;
+        }
+
 
     }
 }
