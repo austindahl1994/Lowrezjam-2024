@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text hpValue;
     [SerializeField] private Slider hpSlider;
     [SerializeField] private GameObject blackout;
-    [SerializeField] private TMP_Text timer;
 
     private void Awake()
     {

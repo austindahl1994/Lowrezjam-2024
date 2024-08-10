@@ -70,7 +70,7 @@ public class Mimic : Platform
     private void WatchPlayer()
     {
         Vector2 playerPos = player.transform.position;
-        Vector2 objectPos = transform.position;
+        Vector2 objectPos = transform.GetChild(1).GetChild(0).transform.position;
 
         if (playerPos.y > objectPos.y)
         {

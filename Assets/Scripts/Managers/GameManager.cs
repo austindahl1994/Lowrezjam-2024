@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
                 cp.gameObject.GetComponent<Checkpoint>().lit = false;
             }
         }
+        UIManager.Instance.GetComponent<Timer>().AddTime();
         Camera.main.GetComponent<CameraController>().ChangeTarget(0);
         UIManager.Instance.RaiseCurtains();
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition, HpAtCheckpoint);
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         HpAtCheckpoint = 3;
         latestCheckpointPosition = new Vector2(0.5f, -1.5f);
         Camera.main.GetComponent<CameraController>().ChangeTarget(0);
+        UIManager.Instance.GetComponent<Timer>().RestartTimer();
         UIManager.Instance.RaiseCurtains();
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);
     }
