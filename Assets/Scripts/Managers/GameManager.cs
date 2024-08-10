@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Transform> checkpoints = new();
     public static GameManager Instance;
+    public List<Transform> checkpoints = new();
     public Vector2 latestCheckpointPosition;
     public int HpAtCheckpoint;
     private void Awake()
@@ -24,23 +24,32 @@ public class GameManager : MonoBehaviour
     }
 
     public void RespawnOnCheckpoint() {
+        if (latestCheckpointPosition == Vector2.zero || latestCheckpointPosition == new Vector2(0.5f, -1.5f)) {
+            RespawnAtStart();
+            return;
+        }
         foreach (Transform cp in checkpoints) {
             if (cp.position.y < latestCheckpointPosition.y) {
                 cp.gameObject.GetComponent<Checkpoint>().lit = false;
             }
         }
+        Camera.main.GetComponent<CameraController>().ChangeTarget(0);
+        UIManager.Instance.RaiseCurtains();
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition, HpAtCheckpoint);
     }
 
-    //Keep HP upgrades? Input PlayerManager.Instance.PlayerMaxHp if so, reset otherwise
     public void RespawnAtStart() {
         foreach (Transform cp in checkpoints)
         {
-            cp.gameObject.GetComponent<Checkpoint>().lit = false;
+            if (cp != null) { 
+                cp.gameObject.GetComponent<Checkpoint>().ResetCheckpoint();
+            }
         }
-        latestCheckpointPosition = new Vector2(0.5f, -1.5f);
-        //Set to player max HP?
+        checkpoints.Clear();
         HpAtCheckpoint = 3;
-        PlayerManager.Instance.InitializePlayer(latestCheckpointPosition, HpAtCheckpoint);
+        latestCheckpointPosition = new Vector2(0.5f, -1.5f);
+        Camera.main.GetComponent<CameraController>().ChangeTarget(0);
+        UIManager.Instance.RaiseCurtains();
+        PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);
     }
 }

@@ -6,7 +6,7 @@ public class BlackoutScreen : MonoBehaviour
 {
     public Image image;
     private bool fading;
-    public Button btn;
+    public Button[] btns;
 
     void Start()
     {
@@ -20,13 +20,13 @@ public class BlackoutScreen : MonoBehaviour
 
     public void FadeInBlackout() {
         if (!fading) { 
-            StartCoroutine(FadeIn(image, 2.0f));
+            StartCoroutine(FadeIn(image, 1.0f));
         }
     }
 
     public void FadeOutBlackout() {
         if (!fading) { 
-            StartCoroutine(FadeOut(image, 1.0f));
+            StartCoroutine(FadeOut(image, 0.5f));
         }
     }
 
@@ -40,28 +40,33 @@ public class BlackoutScreen : MonoBehaviour
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;
-            color.a = Mathf.Lerp(0f, 1f, normalizedTime);
+            color.a = Mathf.Lerp(0f, 0.5f, normalizedTime);
             image.color = color;
             yield return null;
         }
 
-        color.a = 1f;
+        color.a = 0.5f;
         image.color = color;
         fading = false;
-        btn.gameObject.SetActive(true);
+        foreach (Button btn in btns) { 
+            btn.gameObject.SetActive(true);
+        }
     }
 
     IEnumerator FadeOut(Image image, float duration) {
         fading = true;
-        btn.gameObject.SetActive(false);
+        foreach (Button btn in btns)
+        {
+            btn.gameObject.SetActive(false);
+        }
         Color color = image.color;
-        color.a = 1f;
+        color.a = 0.5f;
         image.color = color;
 
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;
-            color.a = Mathf.Lerp(1f, 0f, normalizedTime);
+            color.a = Mathf.Lerp(0.5f, 0f, normalizedTime);
             image.color = color;
             yield return null;
         }

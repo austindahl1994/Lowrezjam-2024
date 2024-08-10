@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text hpValue;
     [SerializeField] private Slider hpSlider;
+    [SerializeField] private GameObject blackout;
+    [SerializeField] private TMP_Text timer;
 
     [SerializeField]
     private RectTransform _pauseMenu, _settingMenu, _uiButtons;
@@ -34,6 +36,15 @@ public class UIManager : MonoBehaviour
     public void ChangeHpValue(int value) { 
         hpValue.text = value.ToString();
         hpSlider.value = value;
+        //Debug.Log("Change HP UIManager called");
+    }
+
+    public void LowerCurtains() {
+        blackout.GetComponent<BlackoutScreen>().FadeInBlackout();
+    }
+
+    public void RaiseCurtains() {
+        blackout.GetComponent<BlackoutScreen>().FadeOutBlackout();
     }
 
     #region Button Behaviour

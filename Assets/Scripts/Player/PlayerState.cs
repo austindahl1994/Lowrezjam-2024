@@ -19,4 +19,10 @@ public class PlayerState : MonoBehaviour
         currentState = newState;
         animator.SetInteger("State", currentState);
     }
+
+    public void ResetState() {
+        //Debug.Log("Resetstate called");
+        currentState = 0;
+        animator.SetInteger("State", 0);
+    }
 }
