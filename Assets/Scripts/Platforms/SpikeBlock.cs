@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeBlock : MonoBehaviour
+public class SpikeBlock : Platform
 {
     private int rotateValue;
     private readonly float bounceForce = 5f;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         rotateValue = 3;
     }
     public void Rotate() {
