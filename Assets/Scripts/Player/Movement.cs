@@ -65,15 +65,15 @@ public class Movement : MonoBehaviour
 
         if (rb.velocity.x == 0 && isGrounded)
         {
-            playerState.SetState(0);
+            //playerState.SetState(0);
         }
         else if (Mathf.Abs(rb.velocity.x) >= 0 && isGrounded)
         {
-            playerState.SetState(1);
+            //playerState.SetState(1);
         }
         else
         {
-            playerState.SetState(2);
+            //playerState.SetState(2);
         }
         //Debug.Log(rb.velocity.x);
         float clampedX = Mathf.Clamp(rb.position.x, -3.64f, 3.64f);
@@ -102,19 +102,21 @@ public class Movement : MonoBehaviour
         {
             if (isGrounded)
             {
-                jumpSound.PlayAudio();
+                //jumpSound.PlayAudio();
+                SoundManager.Instance.PlayPlayerSfx("JumpSFX");
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpCount = 1;
                 canDoubleJump = true;
-                playerState.SetState(2);
+                //playerState.SetState(2);
             }
             else if (canDoubleJump && jumpCount < 2)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpCount++;
                 canDoubleJump = false;
+                isBouncing = false;
                 PlayerManager.Instance.ChangeHp(1, false, false, 0, direction == 0 ? 90 : (direction == 1 ? -135f : 45f));
-                playerState.SetState(2);
+                //playerState.SetState(2);
             }
         }
     }
