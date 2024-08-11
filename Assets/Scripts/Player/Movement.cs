@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     public int jumpCount;
     public bool gettingHit;
     public bool isBouncing;
+    public bool canBounce;
 
     [Header("Wall Bounce")]
     [SerializeField]
@@ -46,7 +47,9 @@ public class Movement : MonoBehaviour
         }
         Move();
         Jump();
-        Bounce();
+        if (canBounce) { 
+            Bounce();
+        }
     }
 
     private void FixedUpdate()
