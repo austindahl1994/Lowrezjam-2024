@@ -7,7 +7,7 @@ public class TrampolineEye : MonoBehaviour
     private float bounceForce = 10f;
 
     [SerializeField]
-    private Player player;
+    private GameObject player;
 
     private Vector2 playerPos;
     private Vector2 objectPos;
@@ -15,20 +15,17 @@ public class TrampolineEye : MonoBehaviour
     [SerializeField]
     private Sprite[] eyes;
 
-    public AudioClip bounceSound;
+    public SoundSO bounceEffect;
+
     public Animator trampolineAnimator;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-
-    private void Awake()
+    private void Start()
     {
         if (player == null)
         {
-            player = FindObjectOfType<Player>();
+            player = PlayerManager.Instance.player;
         }
-    }
-    private void Start()
-    {
         sr = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         rb = player.GetComponent<Rigidbody2D>();
         StartCoroutine(Blink());
@@ -83,8 +80,11 @@ public class TrampolineEye : MonoBehaviour
     {
         if (rb != null)
         {
+            if (other.CompareTag("Player")) {
+                player.GetComponent<Movement>().ResetDoubleJump();
+            }
             rb.velocity = new Vector2(rb.velocity.x, bounceForce);
-            if (other.TryGetComponent<Animator>(out Animator animator))
+            if (other.TryGetComponent<Animator>(out Animator animator) && !PlayerManager.Instance.PlayerDead)
             {
                 animator.Play("Idle");
             }
@@ -92,12 +92,10 @@ public class TrampolineEye : MonoBehaviour
             {
                 trampolineAnimator.SetTrigger("Blink");
             }
-            /* Add when sound effect is available
-             if (bounceSound != null)
+             if (bounceEffect != null)
             {
-                AudioSource.PlayClipAtPoint(bounceSound, transform.position); 
+                bounceEffect.PlayAudio();
             }
-             */
         }
     }
 
