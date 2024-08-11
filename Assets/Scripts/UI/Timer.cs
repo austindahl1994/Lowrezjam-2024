@@ -28,6 +28,10 @@ public class Timer : MonoBehaviour
         if (timerRunning) { 
             TimerValue += Time.deltaTime;
         }
-        timer.text = Mathf.CeilToInt(TimerValue).ToString();
+        int minutes = Mathf.FloorToInt(TimerValue / 60f);
+        int seconds = Mathf.FloorToInt(TimerValue % 60f);
+        int milliseconds = Mathf.FloorToInt((TimerValue * 10f) % 10f);
+
+        timer.text = string.Format("{0:00}:{1:00}:{2:0}", minutes, seconds, milliseconds);
     }
 }
