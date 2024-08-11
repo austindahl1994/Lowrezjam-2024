@@ -17269,7 +17269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &621909340
 Transform:
   m_ObjectHideFlags: 0
@@ -17316,7 +17316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &636636649
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22988,12 +22988,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundSlider: {fileID: 535633087}
+  TimerText: {fileID: 596597791}
+  HPUI: {fileID: 330626544}
   hpValue: {fileID: 1944933596}
   hpSlider: {fileID: 540081927}
   blackout: {fileID: 1181725657}
   _pauseMenu: {fileID: 419852}
   _settingMenu: {fileID: 343700051}
   _uiButtons: {fileID: 600743571}
+  _door: {fileID: 636636652}
 --- !u!114 &896780060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25106,7 +25109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1718502126
 Transform:
   m_ObjectHideFlags: 0

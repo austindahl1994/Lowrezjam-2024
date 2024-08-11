@@ -14,10 +14,10 @@ public class PlayerManager : MonoBehaviour
     public int CurrentPlayerHp { get; private set; }
     public bool PlayerDead { get; private set; }
     public int PlayerDeathCount { get; private set; }
-    public Vector2 CurrentPlayerPosition { get; private set; } 
+    public Vector2 CurrentPlayerPosition { get; private set; }
 
-
-
+    internal Vector2 PlayerPosOnStop;
+    internal bool CanLowerHP = true;
     private void Awake()
     {
         if (Instance == null)
@@ -85,7 +85,8 @@ public class PlayerManager : MonoBehaviour
             CurrentPlayerHp = PlayerMaxHP;
             ChangeUiHp(PlayerMaxHP);
         } else {
-            CurrentPlayerHp -= amount;
+            if(CanLowerHP)
+                CurrentPlayerHp -= amount;
             player.GetComponent<PlayerParticles>().Spurt(bloodDirection);
             PlayPlayerDamageSound();
             ChangeUiHp(CurrentPlayerHp);
