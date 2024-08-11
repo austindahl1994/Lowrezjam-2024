@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 public class Door : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector2 pos = new Vector2(0.5f, -1.5f);
+        Vector2 pos = new(0.5f, -1.5f);
         if (collision.CompareTag("Player"))
         {
             _menuTiles.SetActive(false);
