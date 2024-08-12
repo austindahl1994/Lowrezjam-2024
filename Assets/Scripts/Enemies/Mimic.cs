@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Mimic : MonoBehaviour
+public class Mimic : Platform
 {
-    [SerializeField]
-    private PlayerController playerController;
-
     [SerializeField]
     private GameObject player;
 
     private Transform fake;
     private Transform real;
     private Transform eye;
-    public float targetAngle;
+    private float targetAngle;
     private bool isPlayerInside = false;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         if (player == null)
         {
             player = PlayerManager.Instance.player;
@@ -45,6 +43,7 @@ public class Mimic : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            EnemyManager.Instance.mimics.Add(transform);
             fake.gameObject.SetActive(false);
             real.gameObject.SetActive(true);
             isPlayerInside = true;
@@ -71,7 +70,7 @@ public class Mimic : MonoBehaviour
     private void WatchPlayer()
     {
         Vector2 playerPos = player.transform.position;
-        Vector2 objectPos = transform.position;
+        Vector2 objectPos = transform.GetChild(1).GetChild(0).transform.position;
 
         if (playerPos.y > objectPos.y)
         {

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392da5051421bbe4f88bc7bce33b0d21, type: 3}
+  m_Name: Death
+  m_EditorClassIdentifier: 
+  AudioName: Death Sounds
+  Clips:
+  - {fileID: 8300000, guid: ebcd240b8bc13844ab9b70cf1849b56a, type: 3}
+  - {fileID: 8300000, guid: 58c8b69b588ceb7439a988ad9c1df047, type: 3}
+  - {fileID: 8300000, guid: caaebcbc6a9727b43981e9281f728c3d, type: 3}
+  Volume: 10

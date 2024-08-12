@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Explode : MonoBehaviour
@@ -8,8 +9,8 @@ public class Explode : MonoBehaviour
     private Transform[] bodyParts;
 
     private readonly float force = 5f;
-
-    private void Start()
+    
+    private void OnEnable()
     {
         foreach (Transform part in bodyParts) {
             if (part.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
