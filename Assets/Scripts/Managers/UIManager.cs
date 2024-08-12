@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -9,6 +10,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public Slider SoundSlider;
+    public GameObject TimerText;
+    public GameObject HPUI;
+
+    internal Vector2 PlayerPosition;
 
     [SerializeField] private TMP_Text hpValue;
     [SerializeField] private Slider hpSlider;
@@ -17,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private RectTransform _pauseMenu, _settingMenu, _uiButtons;
 
+
+    [SerializeField]
+    private Door _door;
     private void Awake()
     {
         if (Instance == null)
@@ -51,8 +59,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
-            _pauseMenu.gameObject.SetActive(true);
+            if(!_door.InMenu)
+            {
+                Time.timeScale = 0f;
+                _pauseMenu.gameObject.SetActive(true);
+            }
         }
 
     }
@@ -72,7 +83,12 @@ public class UIManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-
+        //SceneManager.LoadScene(0);
+        PlayerManager.Instance.PlayerPosOnStop = PlayerManager.Instance.player.transform.position;
+        _pauseMenu.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        _door.InitializeObjects();
+        GetComponent<Timer>().PauseTimer();
     }
 
     public void CloseSettingMenu()

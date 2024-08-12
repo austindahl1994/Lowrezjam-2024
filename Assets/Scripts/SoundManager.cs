@@ -25,6 +25,11 @@ public class SoundManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        InitializeVolume();
+    }
+
     #endregion
 
     #region Built Func
@@ -63,7 +68,8 @@ public class SoundManager : MonoBehaviour
             AudioClip selectedClip = sound.Clips[UnityEngine.Random.Range(0, sound.Clips.Count)];
             AudioSource audioSource = Instantiate(_audioSource, transform.position, Quaternion.identity);
             audioSource.clip = selectedClip;
-            audioSource.volume = sound.Volume;
+            audioSource.volume = sound.Volume / 10;
+            //Debug.Log("volume = " + audioSource.volume);
             audioSource.spatialBlend = 0f;
 
             audioSource.Play();
@@ -88,11 +94,19 @@ public class SoundManager : MonoBehaviour
 
     public void ChangeSoundVolum()
     {
-        Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
+        //Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
 
         foreach (var sound in _playerSfx)
         {
-            sound.Volume = (int)UIManager.Instance.SoundSlider.value;
+            sound.Volume = UIManager.Instance.SoundSlider.value ;
+        }
+    }
+
+    private void InitializeVolume()
+    {
+        foreach (var sound in _playerSfx)
+        {
+            sound.Volume = (int)UIManager.Instance.SoundSlider.value ;
         }
     }
     #endregion
