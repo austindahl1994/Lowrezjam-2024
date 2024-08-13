@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392da5051421bbe4f88bc7bce33b0d21, type: 3}
+  m_Name: ShortFireball
+  m_EditorClassIdentifier: 
+  AudioName: Short Fireball
+  Clips:
+  - {fileID: 8300000, guid: 4c5af5639aa50ca4ebe909cc78625e75, type: 3}
+  Volume: 1

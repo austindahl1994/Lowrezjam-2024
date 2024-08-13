@@ -76,6 +76,9 @@ public class PlayerManager : MonoBehaviour
     public void ResetDeath() { 
         PlayerDead = false;
     }
+    public void ResetDeathCount() { 
+        PlayerDeathCount = 0;
+    }
 
     public void ChangeHp(int amount, bool killPlayer = false, bool fullHeal = false, int deathType = 0, float bloodDirection = 0) {
         if (PlayerDead) {
