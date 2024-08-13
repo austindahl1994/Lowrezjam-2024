@@ -22,6 +22,8 @@ public class Checkpoint : MonoBehaviour
             GameManager.Instance.UpdateCheckpoint(transform.position);
             lit = true;
             animator.SetBool("Lit", true);
+            SoundManager.Instance.PlayPlayerSfx("Light CP");
+            
         }
     }
 

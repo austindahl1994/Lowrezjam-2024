@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public Slider SoundSlider;
+    public Slider MusicSlider;
     public GameObject TimerText;
     public GameObject HPUI;
 

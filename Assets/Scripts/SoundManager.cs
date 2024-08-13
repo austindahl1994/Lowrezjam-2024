@@ -14,6 +14,9 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField]
     private AudioSource _audioSource;
+
+
+
     private float time;
 
     #endregion
@@ -68,7 +71,7 @@ public class SoundManager : MonoBehaviour
             AudioClip selectedClip = sound.Clips[UnityEngine.Random.Range(0, sound.Clips.Count)];
             AudioSource audioSource = Instantiate(_audioSource, transform.position, Quaternion.identity);
             audioSource.clip = selectedClip;
-            audioSource.volume = sound.Volume / 10;
+            audioSource.volume = sound.Volume ;
             //Debug.Log("volume = " + audioSource.volume);
             audioSource.spatialBlend = 0f;
 
@@ -98,7 +101,7 @@ public class SoundManager : MonoBehaviour
 
         foreach (var sound in _playerSfx)
         {
-            sound.Volume = UIManager.Instance.SoundSlider.value ;
+            sound.Volume = UIManager.Instance.SoundSlider.value /10;
         }
     }
 
@@ -106,8 +109,9 @@ public class SoundManager : MonoBehaviour
     {
         foreach (var sound in _playerSfx)
         {
-            sound.Volume = (int)UIManager.Instance.SoundSlider.value ;
+            sound.Volume = (int)UIManager.Instance.SoundSlider.value / 10 ;
         }
+
     }
     #endregion
 
