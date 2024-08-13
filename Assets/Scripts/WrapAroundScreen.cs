@@ -37,7 +37,7 @@ public class WrapAroundScreen : MonoBehaviour
         }
     //Want all true
     private bool CheckAll() {
-        return ((!CheckForObject() && CheckForTerrain() && VelocityCheck()) || !PlayerManager.Instance.CanLowerHP);
+        return ((!CheckForObject(transform.position) && CheckForTerrain() && VelocityCheck()) || !PlayerManager.Instance.CanLowerHP);
     }
 
     //returns true if there is something there
@@ -49,9 +49,9 @@ public class WrapAroundScreen : MonoBehaviour
     }
 
     //returns true if there is something there
-    private bool CheckForObject()
+    private bool CheckForObject(Vector2 pos)
     {
-        return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y));
+        return MapManager.Instance.CheckVectorList(pos);
     }
 
     //need to check for tiles above if rb.v.y > 0, it is below going up
@@ -65,13 +65,14 @@ public class WrapAroundScreen : MonoBehaviour
         {
             //Debug.Log($"Checking going up at {tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y + 1))} from {new Vector2(-transform.position.x, transform.position.y)}");
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y - 1));
-            return tilemap.GetTile(cellPosition) == null;
+            return tilemap.GetTile(cellPosition) == null && !CheckForObject(new Vector2(-transform.position.x, transform.position.y - 1));
+
         }
         else if (!goingUp)
         {
             //Debug.Log($"Checking going down at {tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y - 1))} from {new Vector2(-transform.position.x, transform.position.y)}");
             Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y + 1));
-            return tilemap.GetTile(cellPosition) == null;
+            return tilemap.GetTile(cellPosition) == null && !CheckForObject(new Vector2(-transform.position.x, transform.position.y + 1));
         }
         else {
             return true;
