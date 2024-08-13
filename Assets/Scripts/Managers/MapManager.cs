@@ -31,7 +31,7 @@ public class MapManager : MonoBehaviour
         return checkVectors.Contains(RoundToNearestHalf(pos));
     }
 
-    private Vector2 RoundToNearestHalf(Vector2 vector)
+    public Vector2 RoundToNearestHalf(Vector2 vector)
     {
         // Round each component to the nearest 0.5
         float x = RoundToNearestHalf(vector.x);
@@ -42,7 +42,7 @@ public class MapManager : MonoBehaviour
         return new Vector2(x, y);
     }
 
-    private float RoundToNearestHalf(float value)
+    public float RoundToNearestHalf(float value)
     {
         return Mathf.Round(value * 2) / 2;
     }
