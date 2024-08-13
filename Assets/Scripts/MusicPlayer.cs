@@ -25,4 +25,12 @@ public class MusicPlayer : MonoBehaviour
         _audioSource.clip = _music.Clips[index];
         _audioSource.Play();
     }
+
+    public void AdjustVolume()
+    {
+        //Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
+
+        _music.Volume = UIManager.Instance.MusicSlider.value / 10;
+        
+    }
 }
