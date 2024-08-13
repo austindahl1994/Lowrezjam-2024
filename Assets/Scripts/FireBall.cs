@@ -8,15 +8,21 @@ public class FireBall : MonoBehaviour
     private float _lifeDuration;
     [SerializeField]
     private float _projectilSpeed;
+    [SerializeField]
+    private SoundSO _fireballSFX;
 
     private void Start()
     {
         // destroy the projectil after it's life duration expaired
         Invoke("DestroyBullet", _lifeDuration);
+        GetComponent<AudioSource>().clip = _fireballSFX.Clips[0];
+        GetComponent<AudioSource>().volume = _fireballSFX.Volume;
+        GetComponent<AudioSource>().Play();
+
     }
     private void Update()
     {
-        transform.Translate(Vector2.down * _projectilSpeed * Time.deltaTime);
+        transform.Translate(Vector2.left * _projectilSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
