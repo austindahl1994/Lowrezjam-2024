@@ -28,9 +28,13 @@ public class Movement : MonoBehaviour
     private LayerMask wallMask;
     [SerializeField]
     private float rayOffSet;
+    [SerializeField]
+    float _bouncingDuration = .5f;
+    float _bouncingMoment;
     private RaycastHit2D raycastHitRight;
     private RaycastHit2D raycastHitLeft;
     private Vector2 rayOrigin;
+
     internal bool StoredValue;
     private void Start()
     {
@@ -131,6 +135,7 @@ public class Movement : MonoBehaviour
 
                     rb.AddForce((new Vector2(-1, 0) + new Vector2(0, 1)) * forceAmount);
                     isBouncing = true;
+                    _bouncingMoment = Time.time;
                 }
 
                 if (raycastHitLeft)
@@ -138,8 +143,14 @@ public class Movement : MonoBehaviour
                     // Debug.Log("Left Wall Bounce");
                     rb.AddForce((new Vector2(1, 0) + new Vector2(0, 1)) * forceAmount);
                     isBouncing = true;
+                    _bouncingMoment = Time.time;
                 }
             }
+            if(Time.time > _bouncingDuration + _bouncingMoment)
+            {
+                isBouncing = false;
+            }
+
         }
         else
         {

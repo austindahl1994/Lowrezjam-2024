@@ -59,8 +59,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
-            _pauseMenu.gameObject.SetActive(true);
+            if(!_door.InMenu)
+            {
+                Time.timeScale = 0f;
+                _pauseMenu.gameObject.SetActive(true);
+            }
         }
 
     }

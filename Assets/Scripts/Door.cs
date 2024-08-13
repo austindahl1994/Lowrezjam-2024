@@ -6,9 +6,10 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _menuTiles, _collisionTiles, _objectGrid, _menuCollTiles;
+    private GameObject _menuTiles, _collisionTiles, _objectGrid, _menuCollTiles, _settingStatue;
 
     bool _firstTimeOPen = true;
+    internal bool InMenu = true;
     Vector2 pos;
     private void Start()
     {
@@ -16,6 +17,16 @@ public class Door : MonoBehaviour
         InitializeObjects();
     }
 
+
+    private void OnEnable()
+    {
+        InMenu = true;
+    }
+
+    private void OnDisable()
+    {
+        InMenu = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -38,6 +49,7 @@ public class Door : MonoBehaviour
             PlayerManager.Instance.CanLowerHP = true;
             UIManager.Instance.TimerText.SetActive(true);
             UIManager.Instance.HPUI.SetActive(true);
+            _settingStatue.SetActive(false);
             gameObject.SetActive(false);
         }
     }
@@ -48,6 +60,7 @@ public class Door : MonoBehaviour
         _objectGrid.SetActive(false);
         _menuTiles.SetActive(true);
         _menuCollTiles.SetActive(true);
+        _settingStatue.SetActive(true);
         gameObject.SetActive(true);
         UIManager.Instance.TimerText.SetActive(false);
         UIManager.Instance.HPUI.SetActive(false);
