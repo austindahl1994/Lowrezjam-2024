@@ -5,27 +5,39 @@ using UnityEngine;
 public class DisappearingPlatformDetector : MonoBehaviour
 {
     [SerializeField]
+    private Animator _platAnim;
+    [SerializeField]
     private BoxCollider2D _platformCollider;
     [SerializeField]
     private SpriteRenderer _platformSprite;
     [SerializeField]
     private float _disappearanceDuration = 1f, _appearanceDuration = 2f;
 
+    private bool _trigger = true;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(_trigger)
         {
-            StartCoroutine(DisappearanceCoroutine());
+            if(collision.CompareTag("Player"))
+            {
+                StartCoroutine(DisappearanceCoroutine());
+            }
+            
         }
     }
 
     IEnumerator DisappearanceCoroutine()
     {
+        _platAnim.Play("plat_disappear");
         yield return new WaitForSeconds(_appearanceDuration);
+        _trigger = false;
+        _platAnim.Play("plat_disappeared");
         _platformCollider.isTrigger = true;
-        _platformSprite.color = new Color(_platformSprite.color.r, _platformSprite.color.g, _platformSprite.color.b, 0f);
         yield return new WaitForSeconds(_disappearanceDuration);
+        _trigger = true;
         _platformCollider.isTrigger = false;
-        _platformSprite.color = new Color(_platformSprite.color.r, _platformSprite.color.g, _platformSprite.color.b, 1f);
+        _platAnim.Play("plat_idle");
+
     }
 }

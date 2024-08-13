@@ -58,6 +58,7 @@ public class Mimic : Platform
         if (isPlayerInside)
         {
             real.GetComponent<Animator>().SetTrigger("Bite");
+            SoundManager.Instance.PlayPlayerSfx("Mimic Close");
             PlayerManager.Instance.ChangeHp(0, true, false, 1);
         }
         else
