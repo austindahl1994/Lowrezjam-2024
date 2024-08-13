@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<Transform> checkpoints = new();
     public Vector2 latestCheckpointPosition;
-    public int HpAtCheckpoint;
     private void Awake()
     {
         if (Instance == null)
@@ -16,10 +15,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateCheckpoint(Vector2 pos, int hp) {
+    public void UpdateCheckpoint(Vector2 pos) {
         if (pos.y > latestCheckpointPosition.y) { 
             latestCheckpointPosition = pos;
-            HpAtCheckpoint = hp;
+        }
+    }
+
+    public void LightTorches() {
+        if (checkpoints.Count == 0) {
+            return;
+        }
+        foreach (Transform t in checkpoints) { 
+            t.GetComponent<Checkpoint>().lit = true;
+            t.GetComponent<Animator>().SetBool("Lit", true);
         }
     }
 
@@ -28,15 +36,9 @@ public class GameManager : MonoBehaviour
             RespawnAtStart();
             return;
         }
-        foreach (Transform cp in checkpoints) {
-            if (cp.position.y < latestCheckpointPosition.y) {
-                cp.gameObject.GetComponent<Checkpoint>().lit = false;
-            }
-        }
         UIManager.Instance.GetComponent<Timer>().AddTime();
-        Camera.main.GetComponent<CameraController>().ChangeTarget(0);
         UIManager.Instance.RaiseCurtains();
-        PlayerManager.Instance.InitializePlayer(latestCheckpointPosition, HpAtCheckpoint);
+        PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);
     }
 
     public void RespawnAtStart() {
@@ -47,9 +49,7 @@ public class GameManager : MonoBehaviour
             }
         }
         checkpoints.Clear();
-        HpAtCheckpoint = 3;
         latestCheckpointPosition = new Vector2(0.5f, -1.5f);
-        Camera.main.GetComponent<CameraController>().ChangeTarget(0);
         UIManager.Instance.GetComponent<Timer>().RestartTimer();
         UIManager.Instance.RaiseCurtains();
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);

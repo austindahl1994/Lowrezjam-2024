@@ -17,11 +17,11 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text hpValue;
     [SerializeField] private Slider hpSlider;
-    [SerializeField] private GameObject blackout;
+    public GameObject blackout;
+    public bool inUI, deathscreenOpen;
 
     [SerializeField]
     private RectTransform _pauseMenu, _settingMenu, _uiButtons;
-
 
     [SerializeField]
     private Door _door;
@@ -42,14 +42,15 @@ public class UIManager : MonoBehaviour
     public void ChangeHpValue(int value) { 
         hpValue.text = value.ToString();
         hpSlider.value = value;
-        //Debug.Log("Change HP UIManager called");
     }
 
     public void LowerCurtains() {
+        deathscreenOpen = true;
         blackout.GetComponent<BlackoutScreen>().FadeInBlackout();
     }
 
     public void RaiseCurtains() {
+        deathscreenOpen = false;
         blackout.GetComponent<BlackoutScreen>().FadeOutBlackout();
     }
 
@@ -57,45 +58,82 @@ public class UIManager : MonoBehaviour
 
     private void StopGame()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !inUI)
         {
-            if(!_door.InMenu)
+            if (!_door.InMenu)
             {
-                Time.timeScale = 0f;
-                _pauseMenu.gameObject.SetActive(true);
+                OpenPauseMenu();
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && inUI)
+        { 
+            ResumePlay();
         }
 
     }
 
     public void ResumePlay()
     {
+        inUI = false;
         Time.timeScale = 1.0f;
         _pauseMenu.gameObject.SetActive(false);
+        _settingMenu.gameObject.SetActive(false);
+        if (deathscreenOpen)
+        {
+            blackout.SetActive(true);
+        }
     }
 
+    public void OpenPauseMenu() {
+        inUI = true;
+        Time.timeScale = 0f;
+        _pauseMenu.gameObject.SetActive(true);
+        _uiButtons.gameObject.SetActive(true);
+        if (deathscreenOpen)
+        {
+            blackout.SetActive(false);
+        }
+    }
+
+    //Opens settings from door and from pausemenu, settings is just volume
     public void OpenSettings()
     {
+        inUI = true;
+        Time.timeScale = 0f;
         _settingMenu.gameObject.SetActive(true);
         _uiButtons.gameObject.SetActive(false);
-
     }
 
     public void GoToMainMenu()
     {
         //SceneManager.LoadScene(0);
+        bool deadOnArrival = deathscreenOpen;
+        inUI = false;
+        if (deathscreenOpen) {
+            deathscreenOpen = false;
+            blackout.transform.GetChild(0).gameObject.SetActive(false);
+            blackout.transform.GetChild(1).gameObject.SetActive(false);
+            blackout.SetActive(false);
+        }
         PlayerManager.Instance.PlayerPosOnStop = PlayerManager.Instance.player.transform.position;
         _pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
-        _door.InitializeObjects();
+        _door.InitializeObjects(PlayerManager.Instance.CurrentPlayerHp, deadOnArrival);
         GetComponent<Timer>().PauseTimer();
     }
 
     public void CloseSettingMenu()
     {
-        _uiButtons.gameObject.SetActive(true);
-        _settingMenu.gameObject.SetActive(false);
-
+        if (_door.InMenu)
+        {
+            inUI = false;
+            Time.timeScale = 1f;
+            _settingMenu.gameObject.SetActive(false);
+        }
+        else {
+            _uiButtons.gameObject.SetActive(true);
+            _settingMenu.gameObject.SetActive(false);
+        }
     }
 
     public void QuitGame()

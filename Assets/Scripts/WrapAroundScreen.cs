@@ -6,6 +6,8 @@ public class WrapAroundScreen : MonoBehaviour
     private Rigidbody2D _rb;
     public LayerMask layerMask;
     public Tilemap tilemap;
+    [SerializeField]
+    private Door _door;
 
     void Start()
     {
@@ -21,31 +23,60 @@ public class WrapAroundScreen : MonoBehaviour
 
             if (transform.position.x >= rightBound && _rb.velocity.x > 0)
             {
-                if (!CheckForObject() && CheckForTerrain()) {
+                if (CheckAll()) {
                     transform.position = new Vector2(leftBound, transform.position.y);
                 }
             }
             else if (transform.position.x <= leftBound && _rb.velocity.x < 0)
             {
-                if (!CheckForObject() && CheckForTerrain())
+                if (CheckAll())
                 {
                     transform.position = new Vector2(rightBound, transform.position.y);
                 }
             }
         }
-    
+    //Want all true
+    private bool CheckAll() {
+        return ((!CheckForObject(transform.position) && CheckForTerrain() && VelocityCheck()) || !PlayerManager.Instance.CanLowerHP);
+    }
 
-    //returns true if there is nothing
+    //returns true if there is something there
     private bool CheckForTerrain()
     {
         Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y));
+        //Debug.Log($"Checking tile position {cellPosition} from {-transform.position.x}, {transform.position.y + 1}, does it exist: {tilemap.GetTile(cellPosition) != null}");
         return tilemap.GetTile(cellPosition) == null;
     }
 
     //returns true if there is something there
-    private bool CheckForObject()
+    private bool CheckForObject(Vector2 pos)
     {
-        return MapManager.Instance.CheckVectorList(new Vector2(-transform.position.x, transform.position.y));
+        return MapManager.Instance.CheckVectorList(pos);
+    }
+
+    //need to check for tiles above if rb.v.y > 0, it is below going up
+    private bool VelocityCheck() {
+        bool goingUp = PlayerManager.Instance.prb.velocity.y > 0;
+        bool zeroed = (PlayerManager.Instance.player.GetComponent<Movement>().isGrounded);
+        if (zeroed) {
+            //Debug.Log("no vertical velocity");
+            return true;
+        } else if (goingUp)
+        {
+            //Debug.Log($"Checking going up at {tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y + 1))} from {new Vector2(-transform.position.x, transform.position.y)}");
+            Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y - 1));
+            return tilemap.GetTile(cellPosition) == null && !CheckForObject(new Vector2(-transform.position.x, transform.position.y - 1));
+
+        }
+        else if (!goingUp)
+        {
+            //Debug.Log($"Checking going down at {tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y - 1))} from {new Vector2(-transform.position.x, transform.position.y)}");
+            Vector3Int cellPosition = tilemap.WorldToCell(new Vector2(-transform.position.x, transform.position.y + 1));
+            return tilemap.GetTile(cellPosition) == null && !CheckForObject(new Vector2(-transform.position.x, transform.position.y + 1));
+        }
+        else {
+            return true;
+        }
     }
 }
 

@@ -4,7 +4,6 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed = 5;
     public float jumpForce = 10;
-    private PlayerState playerState;
     public Transform groundCheck;
     public LayerMask groundLayer;
     public SoundSO jumpSound;
@@ -17,7 +16,7 @@ public class Movement : MonoBehaviour
     public int jumpCount;
     public bool gettingHit;
     public bool isBouncing;
-    public bool canBounce;
+    public bool canBounce = false;
 
     [Header("Wall Bounce")]
     [SerializeField]
@@ -54,6 +53,7 @@ public class Movement : MonoBehaviour
         if (canBounce) { 
             Bounce();
         }
+        //Debug.Log($"RB in X: {rb.velocity.x} RB in Y: {rb.velocity.y}");
     }
 
     private void FixedUpdate()

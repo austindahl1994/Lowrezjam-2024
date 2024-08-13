@@ -1,13 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class BlackoutScreen : MonoBehaviour
 {
-    public Image image;
+    private Image image;
     private bool fading;
     public Button[] btns;
+    private bool startFaded = false;
+    [SerializeField] private TMP_Text text;
 
+    private void Awake()
+    {
+        image = GetComponent<Image>();
+    }
     void Start()
     {
         fading = false;
@@ -16,6 +23,47 @@ public class BlackoutScreen : MonoBehaviour
         rt.anchorMax = new Vector2(1, 1);
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;
+    }
+
+    private void OnEnable()
+    {
+        if (UIManager.Instance.deathscreenOpen) { 
+            startFaded = true;
+        }
+        if (startFaded)
+        {
+            Color newColor = new(image.color.r, image.color.g, image.color.b, 0.8f);
+            fading = false;
+            image.color = newColor;
+            foreach (Button btn in btns)
+            {
+                btn.gameObject.SetActive(true);
+            }
+            text.gameObject.SetActive(true);
+        }
+        else {
+            Color newColor = new(image.color.r, image.color.g, image.color.b, 0f);
+            fading = false;
+            image.color = newColor;
+            foreach (Button btn in btns)
+            {
+                btn.gameObject.SetActive(false);
+            }
+            text.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDisable()
+    {
+        startFaded = false;
+        Color newColor = new(image.color.r, image.color.g, image.color.b, 0f);
+        fading = false;
+        image.color = newColor;
+        foreach (Button btn in btns)
+        {
+            btn.gameObject.SetActive(false);
+        }
+        text.gameObject.SetActive(false);
     }
 
     public void FadeInBlackout() {
@@ -51,6 +99,7 @@ public class BlackoutScreen : MonoBehaviour
         foreach (Button btn in btns) { 
             btn.gameObject.SetActive(true);
         }
+        text.gameObject.SetActive(false);
     }
 
     IEnumerator FadeOut(Image image, float duration) {
@@ -59,6 +108,7 @@ public class BlackoutScreen : MonoBehaviour
         {
             btn.gameObject.SetActive(false);
         }
+        text.gameObject.SetActive(false);
         Color color = image.color;
         color.a = 0.8f;
         image.color = color;
