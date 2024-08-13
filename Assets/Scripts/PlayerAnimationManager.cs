@@ -65,7 +65,5 @@ public class PlayerAnimationManager : MonoBehaviour
             SoundManager.Instance.PlayPlayerSfx(sfxName);
             time = Time.time;
         }
-
-
     }
 }

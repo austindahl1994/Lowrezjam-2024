@@ -22,7 +22,7 @@ public class FireBall : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         float angle = Vector2.Angle(-transform.up, PlayerManager.Instance.player.transform.right);
-        Debug.Log(angle);
+        //Debug.Log(angle);
         if(collision.CompareTag("Player"))
             PlayerManager.Instance.ChangeHp(1, false, false, 0, angle);
     }

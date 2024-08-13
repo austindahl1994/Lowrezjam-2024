@@ -5,12 +5,11 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private Animator animator;
-    public bool lit;
+    public bool lit = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        lit = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +19,7 @@ public class Checkpoint : MonoBehaviour
         }
         if (collision.CompareTag("Player")) {
             GameManager.Instance.checkpoints.Add(transform);
-            GameManager.Instance.UpdateCheckpoint(transform.position, PlayerManager.Instance.CurrentPlayerHp);
+            GameManager.Instance.UpdateCheckpoint(transform.position);
             lit = true;
             animator.SetBool("Lit", true);
         }

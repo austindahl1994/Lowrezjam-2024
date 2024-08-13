@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private Transform bodyParent;
+
+    [SerializeField]
+    private Door _door;
     public int PlayerMaxHP { get; private set; }
     public int CurrentPlayerHp { get; private set; }
     public bool PlayerDead { get; private set; }
@@ -17,7 +20,8 @@ public class PlayerManager : MonoBehaviour
     public Vector2 CurrentPlayerPosition { get; private set; }
 
     internal Vector2 PlayerPosOnStop;
-    internal bool CanLowerHP = true;
+    public bool CanLowerHP = true;
+    public Rigidbody2D prb;
     private void Awake()
     {
         if (Instance == null)
@@ -33,17 +37,24 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerDeathCount = 0;
         InitializePlayer(new Vector2(0.5f, -1.5f));
+        prb = player.GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if (PlayerDead || _door.isActiveAndEnabled) {
+            CanLowerHP = false;
+        } else {
+            CanLowerHP = true;
+        }
+        //Debug.Log(prb.velocity.y);
     }
 
     public void InitializePlayer(Vector2 pos, int hp = 3) {
-        UIManager.Instance.GetComponent<Timer>().StartTimer();
+        ResetManagers();
         ResetMaxHp();
-        if (PlayerDead) {
-            player.SetActive(true);
-            //player.GetComponent<PlayerState>().ResetState();
-            PlayerDead = false;
-            EnemyManager.Instance.ResetMimics();
-        }
+        ResetDeath();
+        player.SetActive(true);
         if (bodyParent.GetChild(0).gameObject.activeInHierarchy) {
             bodyParent.GetComponentInChildren<PartResetter>().ResetParts();
         }
@@ -62,12 +73,15 @@ public class PlayerManager : MonoBehaviour
     public void ResetMaxHp() {
         PlayerMaxHP = 3;
     }
+    public void ResetDeath() { 
+        PlayerDead = false;
+    }
 
     public void ChangeHp(int amount, bool killPlayer = false, bool fullHeal = false, int deathType = 0, float bloodDirection = 0) {
         if (PlayerDead) {
             return;
         }
-        if (killPlayer || CurrentPlayerHp - amount <= 0) {
+        if ((killPlayer || CurrentPlayerHp - amount <= 0) && CanLowerHP) {
             UIManager.Instance.GetComponent<Timer>().PauseTimer();
             UIManager.Instance.LowerCurtains();
             PlayerDeathCount++;
@@ -87,9 +101,9 @@ public class PlayerManager : MonoBehaviour
         } else {
             if(CanLowerHP)
                 CurrentPlayerHp -= amount;
-            player.GetComponent<PlayerParticles>().Spurt(bloodDirection);
-            PlayPlayerDamageSound();
-            ChangeUiHp(CurrentPlayerHp);
+                player.GetComponent<PlayerParticles>().Spurt(bloodDirection);
+                PlayPlayerDamageSound();
+                ChangeUiHp(CurrentPlayerHp);
         }
     }
 
@@ -117,5 +131,13 @@ public class PlayerManager : MonoBehaviour
                 //player.GetComponent<PlayerState>().SetState(3);
                 break;
         }
+    }
+
+    private void ResetManagers() {
+        Camera.main.GetComponent<CameraController>().ChangeTarget(0);
+        GameManager.Instance.LightTorches();
+        UIManager.Instance.GetComponent<Timer>().StartTimer();
+        UIManager.Instance.blackout.SetActive(true);
+        EnemyManager.Instance.ResetMimics();
     }
 }
