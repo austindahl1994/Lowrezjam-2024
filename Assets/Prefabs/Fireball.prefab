@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeDuration: 1
   _projectilSpeed: 8
-  _fireballSFX: {fileID: 11400000, guid: 1f584296b4ead7a4282f15d5801907dd, type: 2}
+  _fireballSFX: {fileID: 11400000, guid: e3ec6271bdbedb04486bcebdc3be8098, type: 2}
 --- !u!58 &-5374914592184829631
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!95 &1389350985928440626

@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         latestCheckpointPosition = new Vector2(0.5f, -1.5f);
         UIManager.Instance.GetComponent<Timer>().RestartTimer();
         UIManager.Instance.RaiseCurtains();
+        PlayerManager.Instance.ResetDeathCount();
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);
     }
 }

@@ -10,9 +10,14 @@ public class Imp : MonoBehaviour
 
     private float _initiationTime;
     private Animator _anim;
+    public bool facingRight = false;
 
     private void Start()
     {
+        if (facingRight)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
         _anim = GetComponent<Animator>();    
     }
 
@@ -28,7 +33,7 @@ public class Imp : MonoBehaviour
             _anim.Play("imp_attack");
             if (_anim.GetCurrentAnimatorStateInfo(0).IsName("imp_attack") && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime > .9)
             {
-                GameObject.Instantiate(FireBall, Center.transform.position, Center.transform.rotation);
+                GameObject.Instantiate(FireBall, Center.transform.position, Center.transform.rotation, transform);
                 _initiationTime = Time.time;
                 _anim.Play("imp_idle");
             }

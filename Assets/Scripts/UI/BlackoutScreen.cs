@@ -27,6 +27,9 @@ public class BlackoutScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        if (UIManager.Instance == null) {
+            return;
+        }
         if (UIManager.Instance.deathscreenOpen) { 
             startFaded = true;
         }

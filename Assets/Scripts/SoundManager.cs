@@ -15,10 +15,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource _audioSource;
 
-
-
-    private float time;
-
     #endregion
 
     #region Unity Func
@@ -90,7 +86,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayPlayerSfx(string sfxName)
     {
-        float clipLength = PlayerSfxClipLength(sfxName);
+        //Unnecessary?
+        //float clipLength = PlayerSfxClipLength(sfxName);
         PlaySfx(sfxName, _playerSfx);
         
     }
