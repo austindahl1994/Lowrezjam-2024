@@ -10,6 +10,7 @@ public class MusicPlayer : MonoBehaviour
     private AudioSource _audioSource;
     private void Start()
     {
+        UIManager.Instance.MusicSlider.value = 5;
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = _music.Clips[0];
         _audioSource.volume = _music.Volume;
@@ -29,7 +30,6 @@ public class MusicPlayer : MonoBehaviour
     public void AdjustVolume()
     {
         //Debug.Log("volume = " + UIManager.Instance.SoundSlider.value);
-
         _music.Volume = UIManager.Instance.MusicSlider.value / 10;
         
     }

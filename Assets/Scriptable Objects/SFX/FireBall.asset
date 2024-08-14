@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Fire Ball
   Clips:
   - {fileID: 8300000, guid: 7d3b2aeaa9b6f7b49a118d59f45c7463, type: 3}
-  Volume: 3
+  Volume: 1

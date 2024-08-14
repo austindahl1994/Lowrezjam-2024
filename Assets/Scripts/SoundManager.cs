@@ -26,6 +26,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        UIManager.Instance.SoundSlider.value = 5;
+        foreach (var sound in _playerSfx)
+        {
+            sound.Volume = UIManager.Instance.SoundSlider.value / 10;
+        }
         InitializeVolume();
     }
 

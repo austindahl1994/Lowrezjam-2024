@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Short Fireball
   Clips:
   - {fileID: 8300000, guid: 4c5af5639aa50ca4ebe909cc78625e75, type: 3}
-  Volume: 1
+  Volume: 0.2
