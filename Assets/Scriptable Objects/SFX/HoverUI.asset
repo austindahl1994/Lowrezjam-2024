@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: HoverUI
   Clips:
   - {fileID: 8300000, guid: 4991df90c28e57c4ab0492eccf7bb67a, type: 3}
-  Volume: 1
+  Volume: 0.5

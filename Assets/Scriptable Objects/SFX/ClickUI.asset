@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: ClickUI
   Clips:
   - {fileID: 8300000, guid: 45ed80244f5218b4f9b1b88f94fc7278, type: 3}
-  Volume: 1
+  Volume: 0.5

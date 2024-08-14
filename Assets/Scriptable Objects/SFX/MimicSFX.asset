@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Mimic Close
   Clips:
   - {fileID: 8300000, guid: bc256f3a2febf1340a2f4777895aa39a, type: 3}
-  Volume: 10
+  Volume: 0.5

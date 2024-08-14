@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Eye Bounce
   Clips:
   - {fileID: 8300000, guid: adebffc408c68054b8a3b467702e005e, type: 3}
-  Volume: 10
+  Volume: 0.5
