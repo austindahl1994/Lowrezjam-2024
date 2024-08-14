@@ -48,8 +48,16 @@ public class Movement : MonoBehaviour
         if (!canMove || PlayerManager.Instance.PlayerDead) {
             return;
         }
-        Move();
-        Jump();
+        if(!GameManager.Instance.GameEnded)
+        {
+            Move();
+            Jump();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;    
+        }
+
         if (canBounce) { 
             Bounce();
         }

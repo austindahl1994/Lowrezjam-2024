@@ -30,7 +30,7 @@ public class PlayerAnimationManager : MonoBehaviour
             if (_movement.isGrounded)
             {
 
-                if (moveInput == 0)
+                if (moveInput == 0 || GameManager.Instance.GameEnded)
                 {
                     _anim.Play("player_idle");
                 }

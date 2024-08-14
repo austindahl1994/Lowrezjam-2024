@@ -5,6 +5,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    internal string TimeText;
+
     [SerializeField] private TMP_Text timer;
     public float TimerValue { get; private set; }
     private bool timerRunning = false;
@@ -33,5 +35,6 @@ public class Timer : MonoBehaviour
         int milliseconds = Mathf.FloorToInt((TimerValue * 10f) % 10f);
 
         timer.text = string.Format("{0:00}:{1:00}:{2:0}", minutes, seconds, milliseconds);
+        TimeText = string.Format("{0:00}:{1:00}:{2:0}", minutes, seconds, milliseconds); 
     }
 }

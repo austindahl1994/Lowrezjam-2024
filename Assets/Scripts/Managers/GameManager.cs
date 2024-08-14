@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<Transform> checkpoints = new();
     public Vector2 latestCheckpointPosition;
+    internal bool GameEnded = false;
     private void Awake()
     {
         if (Instance == null)

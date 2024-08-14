@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioName: Level Music
   Clips:
+  - {fileID: 8300000, guid: 76a420a6eb8049b498affa70a6f3b536, type: 3}
   - {fileID: 8300000, guid: e16a119b237a9be4284b56fb21b5caf1, type: 3}
-  Volume: 1
+  - {fileID: 8300000, guid: f7714fb06579e524892401b9475c7e76, type: 3}
+  - {fileID: 8300000, guid: 6b400d94c3997994db0390e2e1fcbd7d, type: 3}
+  - {fileID: 8300000, guid: 615ad618aaad3b54da71b06e58b95104, type: 3}
+  Volume: 0.5

@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !inUI)
         {
-            if (!_door.InMenu)
+            if (!_door.InMenu || !GameManager.Instance.GameEnded)
             {
                 OpenPauseMenu();
             }
@@ -104,6 +104,12 @@ public class UIManager : MonoBehaviour
         _settingMenu.gameObject.SetActive(true);
         _uiButtons.gameObject.SetActive(false);
     }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 
     public void GoToMainMenu()
     {
