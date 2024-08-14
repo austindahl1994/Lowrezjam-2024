@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Level Music
   Clips:
   - {fileID: 8300000, guid: e16a119b237a9be4284b56fb21b5caf1, type: 3}
-  Volume: 1
+  Volume: 0.5

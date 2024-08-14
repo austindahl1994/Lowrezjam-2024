@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Light CP
   Clips:
   - {fileID: 8300000, guid: e0cd2b992feab804dbffb658d0002c72, type: 3}
-  Volume: 1
+  Volume: 0.5

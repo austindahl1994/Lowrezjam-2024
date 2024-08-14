@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioName: Holy Heal
   Clips:
   - {fileID: 8300000, guid: 67df61365a393ea43a383167dadaff2f, type: 3}
-  Volume: 1
+  Volume: 0.5
