@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 392da5051421bbe4f88bc7bce33b0d21, type: 3}
-  m_Name: FireBall
+  m_Name: ClickUI
   m_EditorClassIdentifier: 
-  AudioName: Fire Ball
+  AudioName: ClickUI
   Clips:
-  - {fileID: 8300000, guid: 7d3b2aeaa9b6f7b49a118d59f45c7463, type: 3}
+  - {fileID: 8300000, guid: 45ed80244f5218b4f9b1b88f94fc7278, type: 3}
   Volume: 1
