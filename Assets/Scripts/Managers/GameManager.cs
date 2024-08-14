@@ -52,8 +52,15 @@ public class GameManager : MonoBehaviour
         checkpoints.Clear();
         latestCheckpointPosition = new Vector2(0.5f, -1.5f);
         UIManager.Instance.GetComponent<Timer>().RestartTimer();
-        UIManager.Instance.RaiseCurtains();
-        PlayerManager.Instance.ResetDeathCount();
+        if (PlayerManager.Instance.PlayerDead) { 
+            UIManager.Instance.RaiseCurtains();
+            PlayerManager.Instance.ResetDeathCount();
+        }
         PlayerManager.Instance.InitializePlayer(latestCheckpointPosition);
+    }
+
+    public void Restart() {
+        UIManager.Instance.ResumePlay();
+        RespawnAtStart();
     }
 }

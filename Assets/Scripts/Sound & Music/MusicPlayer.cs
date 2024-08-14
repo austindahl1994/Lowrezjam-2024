@@ -57,6 +57,7 @@ public class MusicPlayer : MonoBehaviour
         {
             if (PlayerManager.Instance.PlayerDead)
             {
+                _audioSource.Pause();
                 if(_playOnce)
                 {
                     ChangeMusic(2);

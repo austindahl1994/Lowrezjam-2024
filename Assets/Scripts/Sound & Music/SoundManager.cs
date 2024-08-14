@@ -110,8 +110,15 @@ public class SoundManager : MonoBehaviour
         {
             sound.Volume = UIManager.Instance.SoundSlider.value / 10 ;
         }
-
     }
+
+    public void StopSFX() {
+        foreach (var sound in _playerSfx)
+        {
+            sound.Volume = 0;
+        }
+    }
+
     #endregion
 
     #endregion

@@ -59,9 +59,12 @@ public class UIManager : MonoBehaviour
 
     private void StopGame()
     {
+        if (GameManager.Instance.GameEnded) {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape) && !inUI)
         {
-            if (!_door.InMenu || !GameManager.Instance.GameEnded)
+            if (!_door.InMenu)
             {
                 OpenPauseMenu();
             }
