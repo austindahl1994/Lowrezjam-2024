@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Door _door;
+
+    [SerializeField] private Image[] images;
     private void Awake()
     {
         if (Instance == null)
@@ -34,11 +36,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SetImageDimensions();
+    }
+
     private void Update()
     {
         StopGame();
     }
 
+    private void SetImageDimensions() {
+        foreach (Image i in images) {
+            RectTransform rt = i.GetComponent<RectTransform>();
+            rt.anchorMin = new Vector2(0, 0);
+            rt.anchorMax = new Vector2(1, 1);
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+        }
+    }
 
     public void ChangeHpValue(int value) { 
         hpValue.text = value.ToString();

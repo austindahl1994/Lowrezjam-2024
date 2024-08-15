@@ -11,11 +11,10 @@ public class MusicPlayer : MonoBehaviour
     private Door _door;
 
     private AudioSource _audioSource;
-    private bool _playOnce;
 
     private void Start()
     {
-        UIManager.Instance.MusicSlider.value = 5;
+        UIManager.Instance.MusicSlider.value = 4;
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = _music.Clips[0];
         _audioSource.volume = _music.Volume;
@@ -51,32 +50,23 @@ public class MusicPlayer : MonoBehaviour
         if (_door.InMenu)
         {
             ChangeMusic(0);
-            _audioSource.loop = true;
         }
         else
         {
             if (PlayerManager.Instance.PlayerDead)
             {
                 _audioSource.Pause();
-                if(_playOnce)
-                {
-                    ChangeMusic(2);
-                    _playOnce = false;
-                }
-                _audioSource.loop = false;
                 if(!_audioSource.isPlaying)
                 {
-                    ChangeMusic(3);
+                    ChangeMusic(2);
                 }
 
             }
             else
             {
-                _playOnce = true;
-                _audioSource.loop = true;
                 if (GameManager.Instance.GameEnded)
                 {
-                    ChangeMusic(4);
+                    ChangeMusic(3);
                 }
                 else
                 {

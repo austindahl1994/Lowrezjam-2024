@@ -99,7 +99,7 @@ public class Movement : MonoBehaviour
     {
         float direction = rb.velocity.x > 0.1f ? 1f : (rb.velocity.x < -0.1f ? -1f : 0f);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown("space"))
         {
             if (isGrounded)
             {

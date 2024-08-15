@@ -24,6 +24,9 @@ public class Door : MonoBehaviour
         {
             StartPlaying();
         }
+        if (InMenu) { 
+            UIManager.Instance.GetComponent<Timer>().timerRunning = false;
+        }
     }
 
     private void OnEnable()

@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private TMP_Text timer;
     public float TimerValue { get; private set; }
-    private bool timerRunning = false;
+    public bool timerRunning = false;
     public void StartTimer() { 
         timerRunning = true;
     }

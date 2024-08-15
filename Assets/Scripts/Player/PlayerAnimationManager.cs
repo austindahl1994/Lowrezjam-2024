@@ -8,7 +8,7 @@ public class PlayerAnimationManager : MonoBehaviour
     private Animator _anim;
     private Rigidbody2D _rb;
     private Movement _movement;
-    private float time;
+    //private float time;
     private void Start()
     {
         _anim = GetComponent<Animator>();
@@ -37,7 +37,7 @@ public class PlayerAnimationManager : MonoBehaviour
                 else
                 {
                     _anim.Play("player_walk");
-                    PlaySFX("WalkSFX");
+                    //PlaySFX("WalkSFX");
                 }
 
             }
@@ -57,7 +57,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     }
 
-
+    /*
     private void PlaySFX(string sfxName)
     {
         if ((Time.time - SoundManager.Instance.PlayerSfxClipLength(sfxName) >= time))
@@ -65,5 +65,5 @@ public class PlayerAnimationManager : MonoBehaviour
             SoundManager.Instance.PlayPlayerSfx(sfxName);
             time = Time.time;
         }
-    }
+    }*/
 }

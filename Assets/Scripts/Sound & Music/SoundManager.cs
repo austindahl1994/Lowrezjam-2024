@@ -31,6 +31,13 @@ public class SoundManager : MonoBehaviour
         InitializeVolume();
     }
 
+    private void Update()
+    {
+        if (PlayerManager.Instance.player.transform.position.y > 120 && !GameManager.Instance.GameEnded) {
+            _playerSfx[8].Volume = Mathf.Clamp((UIManager.Instance.SoundSlider.value / 10) - 0.2f, 0, 1);
+        }
+    }
+
     #endregion
 
     #region Built Func
